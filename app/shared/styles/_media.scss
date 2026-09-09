@@ -1,0 +1,33 @@
+@use "breakpoints" as bp;
+
+/// Применяет стили начиная с `$name` и выше (`min-width`).
+///
+/// @param {String} $name - Название брейкпоинта (sm, md, lg, xl, xxl).
+
+@mixin up($name, $breakpoints: bp.$breakpoints) {
+  $min: bp.breakpoint-min($name, $breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+/// Применяет стили от `$name` и ниже (`max-width`)
+///
+/// @param {String} $name - Название брейкпоинта (sm, md, lg, xl, xxl).
+///
+@mixin down($name, $breakpoints: bp.$breakpoints) {
+  $max: bp.breakpoint-max($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

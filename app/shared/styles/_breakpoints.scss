@@ -1,0 +1,67 @@
+@use "sass:map";
+@use "sass:list";
+
+/// Шкала брейкпоинтов.
+///
+/// `sm` — базовое значение `0` (mobile-first).
+///
+$breakpoints: (
+  sm: 0,
+  md: 768px,
+  lg: 1280px,
+  xl: 1536px,
+  xxl: 1920px,
+);
+
+/// Минимальная ширина брейкпоинта.
+///
+/// @param {String} $name - Название брейкпоинта (sm, md, lg, xl, xxl).
+/// @return {Number | Null} Ширина, либо `null` для базового брейкпоинта (`0`).
+///
+@function breakpoint-min($name, $breakpoints: $breakpoints) {
+  @if not map.has-key($breakpoints, $name) {
+    @error 'Неизвестный брейкпоинт `#{$name}`. Доступны: #{map.keys($breakpoints)}.';
+  }
+
+  $size: map.get($breakpoints, $name);
+
+  @if not $size or $size ==0 {
+    @return null;
+  }
+
+  @return $size;
+}
+
+/// Название следующего брейкпоинта вверх по шкале.
+///
+/// @return {String | Null} `null`, если `$name` — самый большой брейкпоинт.
+///
+@function breakpoint-next($name, $breakpoints: $breakpoints) {
+  $names: map.keys($breakpoints);
+  $index: list.index($names, $name);
+
+  @if not $index {
+    @error 'Неизвестный брейкпоинт `#{$name}`. Доступны: #{$names}.';
+  }
+
+  @if $index >=list.length($names) {
+    @return null;
+  }
+
+  @return list.nth($names, $index + 1);
+}
+
+/// Максимальная ширина брейкпоинта — то есть чуть меньше начала следующего.
+/// Вычет 0.02px не даёт `down()` и `up()` сработать на одной и той же ширине.
+///
+/// @return {Number | Null} `null`, если `$name` — самый большой брейкпоинт.
+///
+@function breakpoint-max($name, $breakpoints: $breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+
+  @if not $next {
+    @return null;
+  }
+
+  @return breakpoint-min($next, $breakpoints) - 0.02px;
+}
