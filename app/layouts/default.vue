@@ -1,10 +1,6 @@
 <template>
   <div class="layout">
     <AppHeader />
-    <slot/>
+    <slot />
   </div>
 </template>
-
-<script lang="ts">
-  
-</script>

@@ -1,30 +1,48 @@
 {
   "name": "LaVivion",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "nuxt dev",
     "build": "nuxt build",
+    "build-storybook": "storybook build",
+    "dev": "nuxt dev",
+    "eslint": "eslint --max-warnings=0",
+    "eslint:fix": "eslint --max-warnings=0 --fix",
     "generate": "nuxt generate",
+    "postinstall": "husky && nuxt prepare",
+    "prettier": "prettier --check --ignore-unknown --no-error-on-unmatched-pattern . --experimental-cli",
+    "prettier:write": "prettier --write --ignore-unknown --no-error-on-unmatched-pattern . --experimental-cli",
     "preview": "nuxt preview",
-    "tokens": "node scripts/build-tokens.mjs",
-    "typecheck": "nuxt typecheck",
-    "postinstall": "nuxt prepare",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "tokens": "node scripts/build-tokens.mjs",
+    "typecheck": "nuxt typecheck -b"
   },
+  "nano-staged": {
+    "*.{vue,js,jsx,cjs,mjs,ts,json,yaml}": "eslint --cache --fix --no-warn-ignored",
+    "*": "prettier --write --ignore-unknown --experimental-cli"
+  },
+  "prettier": "@exer7um/prettier-config",
   "dependencies": {
-    "nuxt": "^4.5.2",
+    "nuxt": "4.4.8",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
   },
   "devDependencies": {
-    "@storybook/vue3-vite": "^10.6.0",
+    "@exer7um/eslint-config": "2.3.0",
+    "@exer7um/prettier-config": "0.8.7",
+    "@nuxtjs/storybook": "9.0.1",
     "@types/node": "^26.5.0",
-    "@vitejs/plugin-vue": "^6.0.8",
+    "husky": "9.1.7",
+    "nano-staged": "1.0.2",
     "sass-embedded": "^1.104.0",
-    "storybook": "^10.6.0",
+    "storybook": "10.4.6",
     "typescript": "^5.9.0",
     "vue-tsc": "^3.3.11"
-  }
+  },
+  "trustedDependencies": [
+    "@exer7um/eslint-config",
+    "@parcel/watcher",
+    "esbuild",
+    "unrs-resolver"
+  ]
 }

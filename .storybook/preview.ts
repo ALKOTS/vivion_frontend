@@ -1,15 +1,8 @@
-import type { Preview } from '@storybook/vue3-vite'
-
-import '../app/styles/main.scss'
+import type { Preview } from "@storybook-vue/nuxt"
 
 const preview: Preview = {
   parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
+    controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
   },
 }
 

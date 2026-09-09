@@ -26,3 +26,6 @@ logs
 # Storybook
 storybook-static
 *storybook.log
+
+# Кеш ESLint
+.eslintcache

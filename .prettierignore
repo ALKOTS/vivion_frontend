@@ -1,0 +1,30 @@
+bun.lock
+CHANGELOG.md
+LICENSE
+
+
+tokens/
+scripts/build-tokens.mjs
+nuxt.config.ts
+
+# Сгенерированные SCSS с токенами
+app/shared/styles/tokens/_css-vars.scss
+app/shared/styles/tokens/_variables.scss
+
+# Перенесено из .gitignore
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+node_modules
+storybook-static
+logs
+*.log
+.DS_Store
+.fleet
+.idea
+.env
+.env.*
+!.env.example
