@@ -1,66 +1,61 @@
 @use 'sass:map';
 @use 'sass:list';
 
-/// Breakpoint scale. Keep in sync with the Figma grid.
+/// Шкала брейкпоинтов. 
 ///
-/// `sm` is the mobile-first base at `0`, so `up(sm)` emits no media query at all.
-/// Values live in Sass rather than in a CSS custom property because media queries
-/// cannot read custom properties.
-///
-/// This map is also the single source of truth for `scripts/build-tokens.mjs`, which
-/// parses it to turn per-breakpoint Figma modes into `@media` blocks.
+/// `sm` — базовое значение `0` (mobile-first).
+/// 
 $breakpoints: (
   sm: 0,
   md: 768px,
   lg: 1280px,
   xl: 1536px,
   xxl: 1920px,
-) !default;
+);
 
-/// Minimum width of a breakpoint.
+/// Минимальная ширина брейкпоинта.
 ///
-/// @param {String} $name - Breakpoint name (sm, md, lg, xl, xxl).
-/// @return {Number | Null} The width, or `null` for the base breakpoint (`0`).
-///
-/// @example scss
-///   breakpoint-min(md); // => 768px
-///   breakpoint-min(sm); // => null
+/// @param {String} $name - Название брейкпоинта (sm, md, lg, xl, xxl).
+/// @return {Number | Null} Ширина, либо `null` для базового брейкпоинта (`0`).
+/// 
 @function breakpoint-min($name, $breakpoints: $breakpoints) {
   @if not map.has-key($breakpoints, $name) {
-    @error 'Unknown breakpoint `#{$name}`. Available: #{map.keys($breakpoints)}.';
+    @error 'Неизвестный брейкпоинт `#{$name}`. Доступны: #{map.keys($breakpoints)}.';
   }
 
   $size: map.get($breakpoints, $name);
 
-  @return if($size and $size != 0, $size, null);
+  @if not $size or $size ==0 {
+    @return null;
+  }
+
+  @return $size;
 }
 
-/// Name of the next breakpoint up.
+/// Название следующего брейкпоинта вверх по шкале.
 ///
-/// @return {String | Null} `null` when `$name` is the largest breakpoint.
+/// @return {String | Null} `null`, если `$name` — самый большой брейкпоинт.
 ///
-/// @example scss
-///   breakpoint-next(md);  // => lg
-///   breakpoint-next(xxl); // => null
 @function breakpoint-next($name, $breakpoints: $breakpoints) {
   $names: map.keys($breakpoints);
   $index: list.index($names, $name);
 
   @if not $index {
-    @error 'Unknown breakpoint `#{$name}`. Available: #{$names}.';
+    @error 'Неизвестный брейкпоинт `#{$name}`. Доступны: #{$names}.';
   }
 
-  @return if($index < list.length($names), list.nth($names, $index + 1), null);
+  @if $index >=list.length($names) {
+    @return null;
+  }
+
+  @return list.nth($names, $index + 1);
 }
 
-/// Maximum width of a breakpoint, i.e. just below where the next one starts.
-/// The 0.02px shave stops `down()` and `up()` from both matching the same width.
+/// Максимальная ширина брейкпоинта — то есть чуть меньше начала следующего.
+/// Вычет 0.02px не даёт `down()` и `up()` сработать на одной и той же ширине.
 ///
-/// @return {Number | Null} `null` when `$name` is the largest breakpoint.
+/// @return {Number | Null} `null`, если `$name` — самый большой брейкпоинт.
 ///
-/// @example scss
-///   breakpoint-max(md);  // => 1279.98px
-///   breakpoint-max(xxl); // => null
 @function breakpoint-max($name, $breakpoints: $breakpoints) {
   $next: breakpoint-next($name, $breakpoints);
 

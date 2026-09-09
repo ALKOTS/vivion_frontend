@@ -1,11 +1,1 @@
-// Sass-time token values, for maths and color functions. Rarely needed: in components
-// use the CSS custom properties directly, e.g. `padding: var(--spacing-200)`.
-//
-// Not forwarded from `_abstracts.scss`, so `@use` it explicitly where you need it:
-//   @use '@shared/styles/tokens' as tokens;
-//   $half: math.div(map.get(tokens.$tokens, 'spacing-200'), 2);
-//
-// The runtime custom properties live in `_css-vars.scss`, which is loaded once from
-// `app/styles/main.scss` -- never from here, or every stylesheet would re-emit :root.
-
 @forward 'variables';

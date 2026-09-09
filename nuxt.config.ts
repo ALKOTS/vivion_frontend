@@ -1,40 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { fileURLToPath } from 'node:url'
-
-const srcDir = fileURLToPath(new URL('./app', import.meta.url))
-
-/**
- * Prepend the SCSS abstracts (tokens, mixins) to every stylesheet and
- * every `<style lang="scss">` block, so nothing has to `@use` them by hand.
- *
- * Files inside `shared/styles` are skipped -- they *are* the abstracts, and
- * injecting the entrypoint into itself would be a circular `@use`.
- */
-const injectAbstracts = (source: string, filename: string) => {
-  const normalized = filename.replaceAll('\\', '/')
-  if (normalized.includes('/shared/styles/')) return source
-
-  return `@use "shared/styles/abstracts" as *;\n${source}`
-}
+import { fsdAliases, scssPreprocessorOptions } from './config/scss'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
-  css: ['~/styles/main.scss'],
-
-  // Feature-Sliced Design layers. `app` (this config, app.vue, layouts, styles) and
-  // `pages` are Nuxt's own conventions; the rest are plain FSD.
-  alias: {
-    '@app': `${srcDir}`,
-    '@pages': `${srcDir}/pages`,
-    '@widgets': `${srcDir}/widgets`,
-    '@features': `${srcDir}/features`,
-    '@entities': `${srcDir}/entities`,
-    '@shared': `${srcDir}/shared`,
+  app: {
+    head: {
+      htmlAttrs: { lang: 'ru' },
+    },
   },
 
-  // Auto-import components from each layer's `ui` segment, without a path prefix:
+  css: ['~/styles/main.scss'],
+
+  // Слои Feature-Sliced Design. `app` (этот конфиг, app.vue, layouts, styles) и
+  // `pages` — это соглашения самого Nuxt; остальное — обычный FSD.
+  alias: fsdAliases,
+
+  // Автоимпорт компонентов из сегмента `ui` каждого слоя, без префикса пути:
   // `entities/product/ui/ProductCard.vue` -> <ProductCard />
   components: [
     { path: '~/shared/ui', pattern: '**/*.vue', pathPrefix: false },
@@ -43,7 +26,7 @@ export default defineNuxtConfig({
     { path: '~/widgets', pattern: '*/ui/**/*.vue', pathPrefix: false },
   ],
 
-  // Auto-import composables and helpers from the `model` / `lib` / `config` segments.
+  // Автоимпорт композаблов и хелперов из сегментов `model` / `lib` / `config`.
   imports: {
     dirs: [
       'shared/config',
@@ -58,19 +41,13 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    typeCheck: false, // flip on once `vue-tsc` is added to CI
+    typeCheck: false, // включить, когда `vue-tsc` появится в CI
     strict: true,
   },
 
   vite: {
     css: {
-      preprocessorOptions: {
-        scss: {
-          // Lets stylesheets `@use "shared/styles/..."` from anywhere.
-          loadPaths: [srcDir],
-          additionalData: injectAbstracts,
-        },
-      },
+      preprocessorOptions: { scss: scssPreprocessorOptions },
     },
   },
 })
