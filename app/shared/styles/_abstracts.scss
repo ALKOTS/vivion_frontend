@@ -1,0 +1,12 @@
+// Injected into every .scss file and every <style lang="scss"> block
+// (see `vite.css.preprocessorOptions.scss.additionalData` in nuxt.config.ts).
+//
+// This entrypoint must NEVER emit CSS -- only variables and mixins.
+// Anything that produces output belongs in `app/styles/main.scss` instead.
+//
+// Design tokens are NOT re-exported as Sass values: they are consumed directly as
+// CSS custom properties, e.g. `color: var(--color-text-primary)`.
+
+@forward 'breakpoints';
+@forward 'media';
+@forward 'mixins';

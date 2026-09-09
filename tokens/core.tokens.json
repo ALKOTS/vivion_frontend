@@ -1,0 +1,68 @@
+{
+  "$description": "Tokens",
+  "color": {
+    "$type": "color",
+    "neutral": {
+      "0": { "$value": "#ffffff" },
+      "100": { "$value": "#f4f4f5" },
+      "300": { "$value": "#d4d4d8" },
+      "600": { "$value": "#52525b" },
+      "900": { "$value": "#18181b" }
+    },
+    "brand": {
+      "primary": { "$value": "#7c5cff" },
+      "primary-hover": { "$value": "#6a49f2" }
+    },
+    "bg": {
+      "canvas": { "$value": "{color.neutral.0}" },
+      "muted": { "$value": "{color.neutral.100}" }
+    },
+    "text": {
+      "primary": { "$value": "{color.neutral.900}" },
+      "muted": { "$value": "{color.neutral.600}" }
+    },
+    "border": {
+      "default": { "$value": "{color.neutral.300}" }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "50": { "$value": 4 },
+    "100": { "$value": 8 },
+    "200": { "$value": 16 },
+    "300": { "$value": 24 },
+    "400": { "$value": 32 },
+    "600": { "$value": 48 }
+  },
+  "radius": {
+    "$type": "borderRadius",
+    "sm": { "$value": 4 },
+    "md": { "$value": 8 },
+    "lg": { "$value": 16 },
+    "full": { "$value": 9999 }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": { "$value": "'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif" }
+    },
+    "size": {
+      "$type": "fontSize",
+      "sm": { "$value": 14 },
+      "md": { "$value": 16 },
+      "lg": { "$value": 20 },
+      "xl": { "$value": 32 }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": { "$value": 400 },
+      "medium": { "$value": 500 },
+      "bold": { "$value": 700 }
+    }
+  },
+  "layout": {
+    "$type": "dimension",
+    "container-max": { "$value": 1200 },
+    "header-height": { "$value": 64 }
+  }
+}
