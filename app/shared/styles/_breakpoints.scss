@@ -1,0 +1,72 @@
+@use 'sass:map';
+@use 'sass:list';
+
+/// Breakpoint scale. Keep in sync with the Figma grid.
+///
+/// `sm` is the mobile-first base at `0`, so `up(sm)` emits no media query at all.
+/// Values live in Sass rather than in a CSS custom property because media queries
+/// cannot read custom properties.
+///
+/// This map is also the single source of truth for `scripts/build-tokens.mjs`, which
+/// parses it to turn per-breakpoint Figma modes into `@media` blocks.
+$breakpoints: (
+  sm: 0,
+  md: 768px,
+  lg: 1280px,
+  xl: 1536px,
+  xxl: 1920px,
+) !default;
+
+/// Minimum width of a breakpoint.
+///
+/// @param {String} $name - Breakpoint name (sm, md, lg, xl, xxl).
+/// @return {Number | Null} The width, or `null` for the base breakpoint (`0`).
+///
+/// @example scss
+///   breakpoint-min(md); // => 768px
+///   breakpoint-min(sm); // => null
+@function breakpoint-min($name, $breakpoints: $breakpoints) {
+  @if not map.has-key($breakpoints, $name) {
+    @error 'Unknown breakpoint `#{$name}`. Available: #{map.keys($breakpoints)}.';
+  }
+
+  $size: map.get($breakpoints, $name);
+
+  @return if($size and $size != 0, $size, null);
+}
+
+/// Name of the next breakpoint up.
+///
+/// @return {String | Null} `null` when `$name` is the largest breakpoint.
+///
+/// @example scss
+///   breakpoint-next(md);  // => lg
+///   breakpoint-next(xxl); // => null
+@function breakpoint-next($name, $breakpoints: $breakpoints) {
+  $names: map.keys($breakpoints);
+  $index: list.index($names, $name);
+
+  @if not $index {
+    @error 'Unknown breakpoint `#{$name}`. Available: #{$names}.';
+  }
+
+  @return if($index < list.length($names), list.nth($names, $index + 1), null);
+}
+
+/// Maximum width of a breakpoint, i.e. just below where the next one starts.
+/// The 0.02px shave stops `down()` and `up()` from both matching the same width.
+///
+/// @return {Number | Null} `null` when `$name` is the largest breakpoint.
+///
+/// @example scss
+///   breakpoint-max(md);  // => 1279.98px
+///   breakpoint-max(xxl); // => null
+@function breakpoint-max($name, $breakpoints: $breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+
+  @if not $next {
+    @return null;
+  }
+
+  @return breakpoint-min($next, $breakpoints) - 0.02px;
+}

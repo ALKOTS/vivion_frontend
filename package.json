@@ -3,15 +3,23 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "tokens": "node scripts/build-tokens.mjs",
+    "typecheck": "nuxt typecheck",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
     "nuxt": "^4.5.2",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.0",
+    "sass-embedded": "^1.104.0",
+    "typescript": "^5.9.0",
+    "vue-tsc": "^3.3.11"
   }
 }

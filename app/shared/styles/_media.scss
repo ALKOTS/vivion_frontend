@@ -1,0 +1,48 @@
+@use 'breakpoints' as bp;
+
+/// Applies from `$name` upwards (`min-width`).
+/// At the base breakpoint (`sm`) the content is emitted without a media query.
+///
+/// @param {String} $name - Breakpoint name (sm, md, lg, xl, xxl).
+///
+/// @example scss
+///   .header {
+///     font-size: 14px;
+///
+///     @include up(md) { font-size: 18px; }
+///   }
+@mixin up($name, $breakpoints: bp.$breakpoints) {
+  $min: bp.breakpoint-min($name, $breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+/// Applies from `$name` downwards (`max-width`), i.e. up to just before the next
+/// breakpoint starts. At the largest breakpoint there is no upper bound, so the
+/// content is emitted without a media query.
+///
+/// @param {String} $name - Breakpoint name (sm, md, lg, xl, xxl).
+///
+/// @example scss
+///   .sidebar {
+///     display: block;
+///
+///     @include down(md) { display: none; }   // -> max-width: 1279.98px
+///   }
+@mixin down($name, $breakpoints: bp.$breakpoints) {
+  $max: bp.breakpoint-max($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

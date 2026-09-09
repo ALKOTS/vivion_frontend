@@ -1,0 +1,7 @@
+// The one stylesheet that emits global CSS, loaded from nuxt.config.ts.
+// Order matters: tokens first, so everything below can reference them.
+
+@use '../shared/styles/tokens/css-vars';
+@use 'fonts';
+@use 'reset';
+@use 'base';
