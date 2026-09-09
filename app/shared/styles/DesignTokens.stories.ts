@@ -1,52 +1,42 @@
-import type { Meta, StoryObj } from '@storybook/vue3-vite'
-
-/**
- * Витрина дизайн-токенов, выгруженных из Figma.
- * Заменяет то, что раньше показывала демо-страница.
- *
- * Значения читаются из `getComputedStyle`, поэтому список не нужно держать
- * в синхроне вручную: он показывает то, что реально попало в CSS.
- */
+import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
 const COLORS = [
-  'brand-marine',
-  'additional-gray-900',
-  'additional-gray-700',
-  'additional-gray-500',
-  'additional-gray-300',
-  'additional-gray-200',
-  'additional-gray-100',
-  'additional-gray-50',
-  'additional-white-50',
+  "brand-marine",
+  "additional-gray-900",
+  "additional-gray-700",
+  "additional-gray-500",
+  "additional-gray-300",
+  "additional-gray-200",
+  "additional-gray-100",
+  "additional-gray-50",
+  "additional-white-50",
 ]
 
 const SPACING = [0, 2, 4, 6, 8, 12, 16, 20, 24, 32, 40, 80]
 
 const TEXT_STYLES = [
-  'heading-30-medium',
-  'heading-24-medium',
-  'heading-20-medium',
-  'heading-14-medium',
-  'heading-12-medium',
-  'body-14-regular',
-  'body-14-medium',
-  'body-14-light',
-  'body-12-light',
-  'body-10-light',
+  "heading-30-medium",
+  "heading-24-medium",
+  "heading-20-medium",
+  "heading-14-medium",
+  "heading-12-medium",
+  "body-14-regular",
+  "body-14-medium",
+  "body-14-light",
+  "body-12-light",
+  "body-10-light",
 ]
 
 const meta = {
-  title: 'Дизайн-токены',
-  parameters: {
-    layout: 'fullscreen',
-  },
+  parameters: { layout: "fullscreen" },
+  title: "Дизайн-токены",
 } satisfies Meta
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Colors: Story = {
-  name: 'Цвета',
+  name: "Цвета",
   render: () => ({
     setup: () => ({ names: COLORS }),
     template: `
@@ -66,7 +56,7 @@ export const Colors: Story = {
 }
 
 export const Spacing: Story = {
-  name: 'Отступы',
+  name: "Отступы",
   render: () => ({
     setup: () => ({ steps: SPACING }),
     template: `
@@ -85,7 +75,7 @@ export const Spacing: Story = {
 }
 
 export const Typography: Story = {
-  name: 'Типографика',
+  name: "Типографика",
   render: () => ({
     setup: () => ({ styles: TEXT_STYLES }),
     template: `

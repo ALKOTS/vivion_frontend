@@ -1,7 +1,7 @@
 // Единственный файл стилей, который выводит глобальный CSS; подключается из nuxt.config.ts.
 // Порядок важен: сначала токены, чтобы всё ниже могло на них ссылаться.
 
-@use '../shared/styles/tokens/css-vars';
-@use 'fonts';
-@use 'reset';
-@use 'base';
+@use "../shared/styles/tokens/css-vars";
+@use "fonts";
+@use "reset";
+@use "base";

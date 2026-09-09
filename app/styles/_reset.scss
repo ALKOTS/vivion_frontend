@@ -34,14 +34,14 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
   color: inherit;
+  font: inherit;
 }
 
 button {
   cursor: pointer;
-  background: none;
   border: none;
+  background: none;
 }
 
 p,
@@ -59,10 +59,10 @@ a {
   text-decoration: none;
 }
 
-ul[role='list'],
-ol[role='list'] {
-  list-style: none;
+ul[role="list"],
+ol[role="list"] {
   padding: 0;
+  list-style: none;
 }
 
 :target {

@@ -9,16 +9,20 @@ bun install
 bun run dev      # http://localhost:3000
 ```
 
-| Команда             | Что делает                                          |
-| ------------------- | --------------------------------------------------- |
-| `bun run dev`       | Дев-сервер с HMR                                    |
-| `bun run build`     | Продакшен-сборка в `.output/`                       |
-| `bun run preview`   | Локальный просмотр продакшен-сборки                 |
-| `bun run generate`  | Статическая пререндер-сборка                        |
-| `bun run tokens`    | Пересобрать SCSS из выгрузок Figma в `tokens/`      |
-| `bun run typecheck` | Прогнать `vue-tsc` по всему проекту                 |
-| `bun run storybook` | Storybook на http://localhost:6006                  |
+| Команда                   | Что делает                                         |
+| ------------------------- | -------------------------------------------------- |
+| `bun run dev`             | Дев-сервер с HMR                                   |
+| `bun run build`           | Продакшен-сборка в `.output/`                      |
+| `bun run preview`         | Локальный просмотр продакшен-сборки                |
+| `bun run generate`        | Статическая пререндер-сборка                       |
+| `bun run tokens`          | Пересобрать SCSS из выгрузок Figma в `tokens/`     |
+| `bun run typecheck`       | Прогнать `vue-tsc` по всему проекту                |
+| `bun run storybook`       | Storybook на http://localhost:6006                 |
 | `bun run build-storybook` | Статическая сборка Storybook в `storybook-static/` |
+| `bun run eslint`          | Линтер (успех = ноль предупреждений)               |
+| `bun run eslint:fix`      | Линтер с автоисправлением                          |
+| `bun run prettier`        | Проверить форматирование                           |
+| `bun run prettier:write`  | Отформатировать                                    |
 
 ## Структура
 
@@ -40,7 +44,7 @@ app/
     └── styles/          #   SCSS-абстракции + сгенерированные дизайн-токены
 
 .storybook/              # конфигурация Storybook
-config/scss.ts           # общие настройки Sass и алиасы для Nuxt и Storybook
+config/scss.ts           # настройки Sass и алиасы слоёв для nuxt.config
 tokens/                  # выгрузки переменных Figma (JSON в формате DTCG)
 scripts/build-tokens.mjs # tokens/*.json -> app/shared/styles/tokens/*.scss
 ```
@@ -57,7 +61,7 @@ app -> pages -> widgets -> features -> entities -> shared
 `@app`) — вместе с привычным для Nuxt `~/`:
 
 ```ts
-import type { Product } from '@entities/product/model/types'
+import type { Product } from "@entities/product/model/types"
 ```
 
 Чаще всего они не нужны, потому что автоимпорт настроен по слоям:
@@ -93,17 +97,23 @@ import type { Product } from '@entities/product/model/types'
 ### Брейкпоинты
 
 ```scss
-$breakpoints: (sm: 0, md: 768px, lg: 1280px, xl: 1536px, xxl: 1920px);
+$breakpoints: (
+  sm: 0,
+  md: 768px,
+  lg: 1280px,
+  xl: 1536px,
+  xxl: 1920px,
+);
 ```
 
 `sm` — база mobile-first со значением `0`, поэтому `up(sm)` вообще не создаёт медиазапрос.
 `down()` останавливается на 0.02px раньше следующего брейкпоинта, так что `up(md)` и
 `down(sm)` никогда не срабатывают на одной ширине.
 
-| Миксин             | Результат               |
-| ------------------ | ----------------------- |
-| `up(md)`           | `min-width: 768px`      |
-| `down(md)`         | `max-width: 1279.98px`  |
+| Миксин     | Результат              |
+| ---------- | ---------------------- |
+| `up(md)`   | `min-width: 768px`     |
+| `down(md)` | `max-width: 1279.98px` |
 
 Шкала задана один раз в `app/shared/styles/_breakpoints.scss`; генератор токенов парсит
 эту же карту, а не хранит свою копию.
@@ -124,11 +134,17 @@ bun run build-storybook    # статическая сборка в storybook-st
 Истории лежат рядом с компонентами, внутри своих слайсов FSD:
 `app/shared/ui/base-button/BaseButton.stories.ts`. Отдельная история
 `app/shared/styles/DesignTokens.stories.ts` показывает палитру, шкалу отступов и
-типографику — то, что раньше показывала демо-страница.
+типографику.
 
-Взят standalone `@storybook/vue3-vite`, а не `@nuxtjs/storybook`: модуль для Nuxt
-зафиксирован на Storybook 9.0.5 и тянет `@nuxt/kit ^3`, то есть отстаёт на мажорную
-версию. Примитивам из `shared/ui` рантайм Nuxt не нужен.
+### Почему Nuxt зафиксирован на 4.4.8
+
+Версия Nuxt подобрана под Storybook.
+
+`@storybook-vue/nuxt` объявляет `vite ^5 || ^6 || ^7`. Nuxt 4.4.8 тянет `vite ^7.3.3`,
+поэтому обе стороны используют одну копию vite и всё сходится само собой.
+
+Начиная с Nuxt 4.5 `@nuxt/vite-builder` требует `vite ^8.2.0`, и пересечения с модулем
+больше нет. Это ломает Storybook сразу в двух местах:
 
 ## Дизайн-токены
 
@@ -151,8 +167,12 @@ Figma, заново вызовите `get_variable_defs`, перепишите J
 10 текстовых стилей подключаются миксином, а не пятью свойствами по отдельности:
 
 ```scss
-h1 { @include text-style('heading-30-medium'); }
-p  { @include text-style('body-14-light'); }
+h1 {
+  @include text-style("heading-30-medium");
+}
+p {
+  @include text-style("body-14-light");
+}
 ```
 
 ### Режимы
@@ -160,11 +180,11 @@ p  { @include text-style('body-14-light'); }
 Суффикс режима в имени файла определяет, куда попадёт блок токенов. В текущей выгрузке
 режимов нет, но механика готова:
 
-| Файл | Во что превращается |
-| --- | --- |
-| `core.tokens.json` | `:root` |
-| `size.lg.tokens.json` | `@media (min-width: 1280px) { :root { … } }` |
-| `theme.dark.tokens.json` | `[data-theme='dark']` |
+| Файл                     | Во что превращается                          |
+| ------------------------ | -------------------------------------------- |
+| `core.tokens.json`       | `:root`                                      |
+| `size.lg.tokens.json`    | `@media (min-width: 1280px) { :root { … } }` |
+| `theme.dark.tokens.json` | `[data-theme='dark']`                        |
 
 Суффикс, совпадающий с именем брейкпоинта, становится медиазапросом; любой другой —
 атрибутом темы.

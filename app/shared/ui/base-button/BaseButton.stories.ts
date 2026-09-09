@@ -1,53 +1,48 @@
-import type { Meta, StoryObj } from '@storybook/vue3-vite'
+import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
-import BaseButton from './BaseButton.vue'
+import BaseButton from "./BaseButton.vue"
 
 const meta = {
-  title: 'Shared/UI/BaseButton',
-  component: BaseButton,
-  tags: ['autodocs'],
+  args: { default: "Кнопка", type: "button", variant: "primary" },
   argTypes: {
-    variant: {
-      control: 'inline-radio',
-      options: ['primary', 'ghost'],
-      description: 'Визуальный вариант кнопки',
+    default: {
+      control: "text",
+      description: "Содержимое кнопки (слот по умолчанию)",
     },
     type: {
-      control: 'inline-radio',
-      options: ['button', 'submit', 'reset'],
-      description: 'Нативный type у <button>',
+      control: "inline-radio",
+      description: "Нативный type у <button>",
+      options: ["button", "submit", "reset"],
     },
-    default: {
-      control: 'text',
-      description: 'Содержимое кнопки (слот по умолчанию)',
+    variant: {
+      control: "inline-radio",
+      description: "Визуальный вариант кнопки",
+      options: ["primary", "ghost"],
     },
   },
-  args: {
-    variant: 'primary',
-    type: 'button',
-    default: 'Кнопка',
-  },
+  component: BaseButton,
   render: (args) => ({
     components: { BaseButton },
     setup: () => ({ args }),
     template: '<BaseButton v-bind="args">{{ args.default }}</BaseButton>',
   }),
+  tags: ["autodocs"],
+  title: "Shared/UI/BaseButton",
 } satisfies Meta<typeof BaseButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
-  args: { variant: 'primary', default: 'Основная' },
+  args: { default: "Основная", variant: "primary" },
 }
 
 export const Ghost: Story = {
-  args: { variant: 'ghost', default: 'Прозрачная' },
+  args: { default: "Прозрачная", variant: "ghost" },
 }
 
-/** Оба варианта рядом — удобно сравнивать отступы и высоту. */
 export const AllVariants: Story = {
-  name: 'Все варианты',
+  name: "Все варианты",
   render: () => ({
     components: { BaseButton },
     template: `
@@ -59,8 +54,7 @@ export const AllVariants: Story = {
   }),
 }
 
-/** Длинный текст — проверка, что кнопка не ломается по ширине. */
 export const LongLabel: Story = {
-  name: 'Длинная подпись',
-  args: { default: 'Добавить в корзину и перейти к оформлению' },
+  args: { default: "Добавить в корзину и перейти к оформлению" },
+  name: "Длинная подпись",
 }
