@@ -1,101 +1,180 @@
 # LaVivion
 
-Nuxt 4 + TypeScript + SCSS, organised with [Feature-Sliced Design](https://feature-sliced.design/).
+Nuxt 4 + TypeScript + SCSS, организовано по [Feature-Sliced Design](https://feature-sliced.design/).
 
-## Getting started
+## Запуск
 
 ```bash
 bun install
 bun run dev      # http://localhost:3000
 ```
 
-| Script              | What it does                                              |
-| ------------------- | --------------------------------------------------------- |
-| `bun run dev`       | Dev server with HMR                                       |
-| `bun run build`     | Production build into `.output/`                          |
-| `bun run preview`   | Serve the production build                                |
-| `bun run generate`  | Static prerender                                          |
-| `bun run tokens`    | Regenerate SCSS from the Figma exports in `tokens/`        |
-| `bun run typecheck` | `vue-tsc` over the whole project                          |
+| Команда             | Что делает                                          |
+| ------------------- | --------------------------------------------------- |
+| `bun run dev`       | Дев-сервер с HMR                                    |
+| `bun run build`     | Продакшен-сборка в `.output/`                       |
+| `bun run preview`   | Локальный просмотр продакшен-сборки                 |
+| `bun run generate`  | Статическая пререндер-сборка                        |
+| `bun run tokens`    | Пересобрать SCSS из выгрузок Figma в `tokens/`      |
+| `bun run typecheck` | Прогнать `vue-tsc` по всему проекту                 |
+| `bun run storybook` | Storybook на http://localhost:6006                  |
+| `bun run build-storybook` | Статическая сборка Storybook в `storybook-static/` |
 
-## Structure
+## Структура
 
-Nuxt's `app/` directory is the source root, and the FSD layers live inside it. The FSD
-**app** layer is Nuxt's own convention set (`app.vue`, `layouts/`, `styles/`, `nuxt.config.ts`).
+Директория `app/` — корень исходников Nuxt, слои FSD живут внутри неё. Слой **app** из FSD —
+это собственные соглашения Nuxt (`app.vue`, `layouts/`, `styles/`, `nuxt.config.ts`).
 
 ```
 app/
-├── app.vue              # root component: <NuxtLayout><NuxtPage /></NuxtLayout>
-├── layouts/             # app layer -- default.vue and friends
-├── styles/              # app layer -- global CSS (reset, base, fonts)
-├── pages/               # pages layer -- also Nuxt's file-based router
-├── widgets/             # composite page sections (header, sidebar, ...)
-├── features/            # user actions that carry business value
-├── entities/            # business entities (user, product, ...)
-└── shared/              # reusable, business-agnostic code
-    ├── ui/              #   design-system primitives
+├── app.vue              # корневой компонент: <NuxtLayout><NuxtPage /></NuxtLayout>
+├── layouts/             # слой app — default.vue и другие макеты
+├── styles/              # слой app — глобальный CSS (reset, базовые стили, шрифты)
+├── pages/               # слой pages — он же файловый роутер Nuxt
+├── widgets/             # составные секции страниц (шапка, сайдбар, ...)
+├── features/            # действия пользователя, несущие бизнес-ценность
+├── entities/            # бизнес-сущности (пользователь, товар, ...)
+└── shared/              # переиспользуемый код без бизнес-смысла
+    ├── ui/              #   примитивы дизайн-системы
     ├── lib/  api/  config/  types/
-    └── styles/          #   SCSS abstracts + generated design tokens
+    └── styles/          #   SCSS-абстракции + сгенерированные дизайн-токены
 
-tokens/                  # drop Figma token exports here (see tokens/README.md)
+.storybook/              # конфигурация Storybook
+config/scss.ts           # общие настройки Sass и алиасы для Nuxt и Storybook
+tokens/                  # выгрузки переменных Figma (JSON в формате DTCG)
 scripts/build-tokens.mjs # tokens/*.json -> app/shared/styles/tokens/*.scss
 ```
 
-Each layer has a `README.md` spelling out what belongs in it. The import rule is
-one-directional: a layer may only import from layers **below** it.
+Правило импортов одностороннее: слой может импортировать только из слоёв **ниже** себя.
 
 ```
 app -> pages -> widgets -> features -> entities -> shared
 ```
 
-### Imports
+### Импорты
 
-Path aliases exist for every layer (`@shared`, `@entities`, `@features`, `@widgets`,
-`@pages`, `@app`), alongside Nuxt's usual `~/`:
+Для каждого слоя есть алиас (`@shared`, `@entities`, `@features`, `@widgets`, `@pages`,
+`@app`) — вместе с привычным для Nuxt `~/`:
 
-## Styles
+```ts
+import type { Product } from '@entities/product/model/types'
+```
 
-`app/shared/styles/_abstracts.scss` is injected into every stylesheet and every
-`<style lang="scss">` block, so the breakpoint mixins and helpers are always in scope
-without an `@use` line. Design tokens are used as plain CSS custom properties:
+Чаще всего они не нужны, потому что автоимпорт настроен по слоям:
+
+- **Компоненты** — каждый `*.vue` внутри `shared/ui/` и внутри сегмента `ui/` любого слайса
+  регистрируется глобально, без префикса пути:
+  `widgets/app-header/ui/AppHeader.vue` → `<AppHeader />`.
+- **Композаблы и хелперы** — всё из `shared/lib`, `shared/config` и из сегментов `model/`
+  и `lib/` каждого слайса.
+
+Поэтому не делайте бочки `index.ts` внутри автоимпортируемых директорий: реэкспорт
+зарегистрирует то же имя дважды.
+
+## Стили
+
+`app/shared/styles/_abstracts.scss` подставляется в каждый файл стилей и в каждый блок
+`<style lang="scss">`, так что миксины брейкпоинтов и хелперы всегда доступны без `@use`.
+Дизайн-токены используются как обычные CSS-переменные:
 
 ```vue
 <style scoped lang="scss">
 .card {
-  padding: var(--spacing-200);
-  border-radius: var(--radius-md);
-  color: var(--color-text-primary);
+  padding: var(--spacing-16);
+  color: var(--additional-gray-900);
 
   @include up(md) {
-    padding: var(--spacing-400);
+    padding: var(--spacing-32);
   }
 }
 </style>
 ```
 
-### Breakpoints
+### Брейкпоинты
 
 ```scss
 $breakpoints: (sm: 0, md: 768px, lg: 1280px, xl: 1536px, xxl: 1920px);
 ```
 
-`sm` is the mobile-first base at `0`, so `up(sm)` emits its content with no media query.
-`down()` stops 0.02px short of the next breakpoint, so `up(md)` and `down(sm)` never both
-match the same width.
+`sm` — база mobile-first со значением `0`, поэтому `up(sm)` вообще не создаёт медиазапрос.
+`down()` останавливается на 0.02px раньше следующего брейкпоинта, так что `up(md)` и
+`down(sm)` никогда не срабатывают на одной ширине.
 
-| Mixin              | Result                  |
+| Миксин             | Результат               |
 | ------------------ | ----------------------- |
 | `up(md)`           | `min-width: 768px`      |
 | `down(md)`         | `max-width: 1279.98px`  |
 
-The scale is defined once in `app/shared/styles/_breakpoints.scss`; the token generator
-parses that same map rather than keeping its own copy.
+Шкала задана один раз в `app/shared/styles/_breakpoints.scss`; генератор токенов парсит
+эту же карту, а не хранит свою копию.
 
-## Design tokens
+Точка входа с абстракциями не должна выводить CSS. Всё, что порождает вывод, лежит в
+`app/styles/main.scss` — единственном глобальном файле стилей, подключённом из
+`nuxt.config.ts`.
 
-`tokens/` is the drop point for Figma exports (W3C DTCG or Tokens Studio format).
-`bun run tokens` compiles them into two generated, committed files:
+## Storybook
 
-- `app/shared/styles/tokens/_css-vars.scss` — the custom properties, loaded once
-- `app/shared/styles/tokens/_variables.scss` — base values as Sass literals, for the rare
-  case that needs compile-time maths
+Витрина компонентов живёт в Storybook, отдельной демо-страницы в приложении нет.
+
+```bash
+bun run storybook          # http://localhost:6006
+bun run build-storybook    # статическая сборка в storybook-static/
+```
+
+Истории лежат рядом с компонентами, внутри своих слайсов FSD:
+`app/shared/ui/base-button/BaseButton.stories.ts`. Отдельная история
+`app/shared/styles/DesignTokens.stories.ts` показывает палитру, шкалу отступов и
+типографику — то, что раньше показывала демо-страница.
+
+Взят standalone `@storybook/vue3-vite`, а не `@nuxtjs/storybook`: модуль для Nuxt
+зафиксирован на Storybook 9.0.5 и тянет `@nuxt/kit ^3`, то есть отстаёт на мажорную
+версию. Примитивам из `shared/ui` рантайм Nuxt не нужен.
+
+## Дизайн-токены
+
+В `tokens/` лежат выгрузки переменных Figma (формат W3C DTCG). `bun run tokens` собирает
+из них два сгенерированных файла, которые коммитятся в репозиторий:
+
+- `app/shared/styles/tokens/_css-vars.scss` — сами CSS-переменные, подключаются один раз
+- `app/shared/styles/tokens/_variables.scss` — базовые значения как литералы Sass, на
+  редкий случай, когда нужны вычисления на этапе компиляции
+
+`tokens/core.tokens.json` выгружен из файла Figma `DbEAEhKtOtyIuOqD3ggxH8` (узел
+`201:525`) через MCP-сервер Figma — 97 переменных: палитра Marine/gray, шкалы отступов и
+гэпов, типографические примитивы и 10 текстовых стилей. Чтобы обновить: выделите фрейм в
+Figma, заново вызовите `get_variable_defs`, перепишите JSON и запустите `bun run tokens`.
+
+Имена сохраняются **как в Figma** (`--brand-marine`, `--spacing-16`, `--font-body-size-m`),
+чтобы CSS оставался сравнимым с макетом. Недопустимые для CSS символы генератор вырезает:
+`additionalGray/500!` → `--additional-gray-500`.
+
+10 текстовых стилей подключаются миксином, а не пятью свойствами по отдельности:
+
+```scss
+h1 { @include text-style('heading-30-medium'); }
+p  { @include text-style('body-14-light'); }
+```
+
+### Режимы
+
+Суффикс режима в имени файла определяет, куда попадёт блок токенов. В текущей выгрузке
+режимов нет, но механика готова:
+
+| Файл | Во что превращается |
+| --- | --- |
+| `core.tokens.json` | `:root` |
+| `size.lg.tokens.json` | `@media (min-width: 1280px) { :root { … } }` |
+| `theme.dark.tokens.json` | `[data-theme='dark']` |
+
+Суффикс, совпадающий с именем брейкпоинта, становится медиазапросом; любой другой —
+атрибутом темы.
+
+### Чего пока нет в Figma
+
+В макете не заданы переменными радиусы скругления и размеры лейаута. Сейчас в коде
+используется `--layout-container-max`, которая нигде не объявлена, — её нужно либо завести
+в Figma, либо задать локально.
+
+Дизайн также рассчитан на шрифт **Suisse Intl** — он лицензионный и в репозиторий не
+входит. Блоки `@font-face` заготовлены в `app/styles/_fonts.scss`: положите файлы `.woff2`
+в `public/fonts/` и раскомментируйте. До этого используется системный шрифт без засечек.

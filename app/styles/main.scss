@@ -1,5 +1,5 @@
-// The one stylesheet that emits global CSS, loaded from nuxt.config.ts.
-// Order matters: tokens first, so everything below can reference them.
+// Единственный файл стилей, который выводит глобальный CSS; подключается из nuxt.config.ts.
+// Порядок важен: сначала токены, чтобы всё ниже могло на них ссылаться.
 
 @use '../shared/styles/tokens/css-vars';
 @use 'fonts';

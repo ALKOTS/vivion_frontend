@@ -19,27 +19,25 @@ withDefaults(
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-100);
-  padding: var(--spacing-100) var(--spacing-200);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-md);
+  gap: var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-16);
+  font-weight: var(--font-body-weight-medium);
   transition: background-color 0.15s ease, color 0.15s ease;
 
   &--primary {
-    color: var(--color-neutral-0);
-    background-color: var(--color-brand-primary);
+    color: var(--additional-white-50);
+    background-color: var(--brand-marine);
 
     &:hover {
-      background-color: var(--color-brand-primary-hover);
     }
   }
 
   &--ghost {
-    color: var(--color-text-primary);
-    border: 1px solid var(--color-border-default);
+    color: var(--additional-gray-900);
+    border: 1px solid var(--additional-gray-300);
 
     &:hover {
-      background-color: var(--color-bg-muted);
+      background-color: var(--additional-gray-100);
     }
   }
 }

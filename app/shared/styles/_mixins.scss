@@ -1,4 +1,4 @@
-/// Visually hide an element while keeping it available to screen readers.
+/// Визуально скрывает элемент, оставляя его доступным для скринридеров.
 @mixin visually-hidden {
   position: absolute;
   width: 1px;
@@ -11,10 +11,23 @@
   border: 0;
 }
 
-/// Truncate text to a given number of lines.
+/// Обрезает текст до заданного числа строк.
 @mixin line-clamp($lines: 1) {
   display: -webkit-box;
   -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/// Применяет один из текстовых стилей, выгруженных из Figma.
+/// Имя — это суффикс токена, например `heading-30-medium`, `body-14-light`.
+///
+/// @example scss
+///   h1 { @include text-style('heading-30-medium'); }
+@mixin text-style($name) {
+  font-family: var(--text-#{$name}-family);
+  font-size: var(--text-#{$name}-size);
+  font-weight: var(--text-#{$name}-weight);
+  line-height: var(--text-#{$name}-line-height);
+  letter-spacing: var(--text-#{$name}-letter-spacing);
 }

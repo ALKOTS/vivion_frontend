@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div>
     <h1>LaVivion</h1>
-    <p>Placeholder home page.</p>
+    <p>Заготовка главной страницы.</p>
   </div>
 </template>
 
@@ -9,10 +9,3 @@
 useHead({ title: 'LaVivion' })
 </script>
 
-<style scoped lang="scss">
-.home {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-200);
-}
-</style>
