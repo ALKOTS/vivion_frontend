@@ -40,6 +40,15 @@ export default defineNuxtConfig({
     ],
   },
 
+  // Локальные SVG из `app/assets/icons` доступны как <Icon name="icons:cart" />
+  icon: {
+    customCollections: [{ prefix: 'icons', dir: './app/assets/icons' }],
+  },
+
+  nitro: {
+    devStorage: { cache: { driver: 'memory' } },
+  },
+
   typescript: {
     typeCheck: false, // включить, когда `vue-tsc` появится в CI
     strict: true,
@@ -50,4 +59,16 @@ export default defineNuxtConfig({
       preprocessorOptions: { scss: scssPreprocessorOptions },
     },
   },
+
+
+  fonts: {
+    defaults: {
+      weights: [300, 500],
+      styles: ['normal', 'italic'],
+    },
+    families: [{ name: 'Suisse Intl', provider: 'local', global: true }],
+  },
+
+  modules: ['@nuxt/icon', '@nuxt/fonts'],
+
 })

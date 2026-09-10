@@ -1,12 +1,13 @@
 {
   "$description": "Выгружено из файла Figma DbEAEhKtOtyIuOqD3ggxH8, узел 201:525, через MCP-сервер Figma. Пересобрать SCSS: bun run tokens.",
   "brand": { "$type": "color", "Marine": { "$value": "#002d38" } },
-  "brandMarine": { "$type": "color", "800!": { "$value": "#002d38" } },
+  "brandMarine": { "$type": "color", "600": { "$value": "#2A5965" }, "700":{ "$value": "#123F4A" }, "800!": { "$value": "#002d38" } },
   "additionalGray": {
     "50": { "$value": "#fafafa" },
     "100": { "$value": "#f1f4f5" },
     "200": { "$value": "#e6ebed" },
     "300": { "$value": "#d7dee0" },
+    "400": { "$value": "#C0C9CC" },
     "700": { "$value": "#515c60" },
     "900": { "$value": "#000000" },
     "$type": "color",

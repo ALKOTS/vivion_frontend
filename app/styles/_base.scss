@@ -5,18 +5,7 @@
 body {
   background-color: var(--additional-white-50);
   color: var(--additional-gray-900);
-}
-
-h1 {
-  @include text-style("heading-30-medium");
-}
-
-h2 {
-  @include text-style("heading-20-medium");
-}
-
-h3 {
-  @include text-style("heading-14-medium");
+  font-family: var(--font-family-body);
 }
 
 .layout {
