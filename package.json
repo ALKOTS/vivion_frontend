@@ -25,7 +25,6 @@
   "dependencies": {
     "@nuxt/icon": "2.5.1",
     "nuxt": "4.4.8",
-    "nuxt-icons": "4.0.0",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
   },

@@ -1,3 +1,5 @@
+@use "sass:list";
+
 /// Визуально скрывает элемент, оставляя его доступным для скринридеров.
 @mixin visually-hidden {
   position: absolute;
@@ -30,4 +32,69 @@
   line-height: var(--text-#{$name}-line-height);
   font-family: var(--text-#{$name}-family);
   letter-spacing: var(--text-#{$name}-letter-spacing);
+}
+
+@mixin focus {
+  body:not(._use-mouse) & {
+    @supports #{"\selector(:focus-visible)"} {
+      &:focus-visible {
+        @content;
+
+        &:not(input):not(textarea),
+        &[type="checkbox"] + label,
+        &[type="radio"] + label {
+          outline: black auto;
+          outline-offset: 2px;
+        }
+      }
+    }
+    @supports not (#{"\selector(:focus-visible)"}) {
+      &[data-focus-visible-added] {
+        @content;
+
+        &:not(input):not(textarea),
+        &[type="checkbox"] + label,
+        &[type="radio"] + label {
+          outline: black auto;
+          outline-offset: 2px;
+        }
+      }
+    }
+  }
+}
+
+@mixin hover-only {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @include hover-only {
+    &:hover {
+      @content;
+    }
+  }
+  @include focus {
+    @content;
+  }
+}
+
+@mixin transition(
+  $props,
+  $duration: 200ms,
+  $funtion: ease-in-out,
+  $delay: null
+) {
+  $list: ();
+
+  @each $prop in $props {
+    $list: list.append(
+      $list,
+      ($prop $duration $funtion $delay),
+      $separator: comma
+    );
+  }
+
+  transition: $list;
 }
