@@ -50,4 +50,16 @@ export default defineNuxtConfig({
       preprocessorOptions: { scss: scssPreprocessorOptions },
     },
   },
+
+
+  fonts: {
+    defaults: {
+      weights: [300, 500],
+      styles: ['normal', 'italic'],
+    },
+    families: [{ name: 'Suisse Intl', provider: 'local', global: true }],
+  },
+
+  modules: ['nuxt-icons', '@nuxt/icon', '@nuxt/fonts'],
+
 })
