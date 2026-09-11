@@ -9,49 +9,35 @@ const filters = [
     id: "classic",
     img: "/images/quick-filters/classic.png",
     name: "Классические",
-    to: "/catalog?style=classic",
   },
   {
     id: "pave",
     img: "/images/quick-filters/pave.png",
     name: "С бриллиантовой дорожкой",
-    to: "/catalog?style=pave",
   },
   {
     id: "three-stone",
     img: "/images/quick-filters/three-stone.png",
     name: "С тремя камнями",
-    to: "/catalog?style=three-stone",
   },
-  {
-    id: "halo",
-    img: "/images/quick-filters/halo.png",
-    name: "С ободком halo",
-    to: "/catalog?style=halo",
-  },
+  { id: "halo", img: "/images/quick-filters/halo.png", name: "С ободком halo" },
   {
     id: "exclusive",
     img: "/images/quick-filters/exclusive.png",
     name: "Эксклюзивные помолвочные кольца",
-    to: "/catalog?style=exclusive",
   },
-  {
-    id: "all",
-    img: "/images/quick-filters/all.png",
-    name: "Смотреть всё",
-    to: "/catalog",
-  },
+  { id: "all", img: "/images/quick-filters/all.png", name: "Смотреть всё" },
 ] satisfies QuickFilter[]
 
 const [filter] = filters
 
 const meta = {
-  args: { ...filter, component: "div" },
+  args: { ...filter, disabled: false, loading: false },
   argTypes: {
-    component: {
-      control: "inline-radio",
-      description: "Тег обёртки: `li` — если карточка лежит в списке",
-      options: ["div", "li"],
+    disabled: {
+      control: "boolean",
+      description:
+        "Выключенная карточка: без ссылки и hover, курсор not-allowed",
     },
     id: { control: "text", description: "Идентификатор фильтра" },
     img: {
@@ -59,8 +45,12 @@ const meta = {
       description: "Путь к картинке; фото ожидается на белом фоне",
       options: filters.map(({ img }) => img),
     },
+    loading: {
+      control: "boolean",
+      description:
+        "Состояние загрузки: спиннер вместо картинки, клики не проходят",
+    },
     name: { control: "text", description: "Подпись под картинкой" },
-    to: { control: "text", description: "Куда ведёт карточка" },
   },
   component: QuickFiltersCard,
   parameters: {
@@ -68,7 +58,8 @@ const meta = {
       description: {
         component: [
           "Карточка быстрого фильтра каталога: квадратная картинка на серой подложке",
-          "и подпись капителью. Карточка целиком — ссылка.",
+          "и подпись капителью. Карточка целиком — кнопка: принимает любые",
+          "нативные атрибуты <button>, обработчик вешают на `@click`.",
           "",
           "Фото ожидается на белом фоне: за счёт `mix-blend-mode: darken` белый",
           "растворяется в подложке, а осветляющий градиент к низу повторяет",
@@ -113,14 +104,62 @@ export const WithoutImage: Story = {
   }),
 }
 
+export const Disabled: Story = {
+  args: { ...filter, disabled: true },
+  name: "Выключенная",
+  render: (args) => ({
+    components: { QuickFiltersCard },
+    setup: () => ({ args }),
+    template: `<div style="width: 212px"><QuickFiltersCard v-bind="args" /></div>`,
+  }),
+}
+
+export const Loading: Story = {
+  args: { ...filter, loading: true },
+  name: "Загрузка",
+  render: (args) => ({
+    components: { QuickFiltersCard },
+    setup: () => ({ args }),
+    template: `<div style="width: 212px"><QuickFiltersCard v-bind="args" /></div>`,
+  }),
+}
+
+export const AllStates: Story = {
+  name: "Все состояния",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Hover и active видны только на живой карточке — наведите курсор и зажмите кнопку мыши.",
+      },
+    },
+  },
+  render: () => ({
+    components: { QuickFiltersCard },
+    setup: () => ({ filter }),
+    template: `
+      <div style="display: grid; grid-template-columns: repeat(3, 212px); gap: 24px;">
+        <QuickFiltersCard v-bind="filter" name="Обычная" />
+        <QuickFiltersCard v-bind="filter" name="Выключенная" disabled />
+        <QuickFiltersCard v-bind="filter" name="Загрузка" loading />
+      </div>
+    `,
+  }),
+}
+
 export const InList: Story = {
   name: "В списке",
   render: () => ({
     components: { QuickFiltersCard },
-    setup: () => ({ filters }),
+    setup: () => ({
+      filters,
+      onClick: (id: string) => console.log("filter", id),
+    }),
     template: `
       <ul style="display: grid; grid-template-columns: repeat(6, 212px); gap: 24px; margin: 0; padding: 0; list-style: none;">
-        <QuickFiltersCard v-for="filter in filters" :key="filter.id" v-bind="filter" component="li" />
+        <li v-for="filter in filters" :key="filter.id">
+          <QuickFiltersCard v-bind="filter" @click="onClick(filter.id)" />
+        </li>
       </ul>
     `,
   }),
