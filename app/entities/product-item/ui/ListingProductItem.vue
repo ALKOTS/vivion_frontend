@@ -132,11 +132,17 @@ const hasMaterials = computed(
       top: 8px;
       left: 8px;
     }
+
+    #{$root}__img {
+      flex: 1;
+    }
   }
 
   &__link {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
   }
 
   &__img {
