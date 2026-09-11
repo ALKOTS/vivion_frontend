@@ -27,6 +27,7 @@ defineProps<{
   gap: var(--spacing-4);
   background: var(--additional-gray-200);
   padding: var(--spacing-2) var(--spacing-4) var(--spacing-2) var(--spacing-6);
+  width: fit-content;
 
   &__text {
     @include text-style("body-12-light");
