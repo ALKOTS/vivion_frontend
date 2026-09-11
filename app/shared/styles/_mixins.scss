@@ -98,3 +98,8 @@
 
   transition: $list;
 }
+
+@mixin cover-pic {
+  object-fit: cover;
+  object-position: center;
+}
