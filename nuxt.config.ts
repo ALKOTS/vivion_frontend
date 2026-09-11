@@ -40,6 +40,11 @@ export default defineNuxtConfig({
     ],
   },
 
+  image: {
+    format: ["webp"],
+    screens: { lg: 1280, md: 768, sm: 320, xl: 1536, xxl: 1920 },
+  },
+
   // Локальные SVG из `app/assets/icons` доступны как <Icon name="icons:cart" />
   icon: {
     customCollections: [{ prefix: 'icons', dir: './app/assets/icons' }],
@@ -58,6 +63,13 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: { scss: scssPreprocessorOptions },
     },
+
+    optimizeDeps: {
+      include: [
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+      ]
+    }
   },
 
 
@@ -69,6 +81,6 @@ export default defineNuxtConfig({
     families: [{ name: 'Suisse Intl', provider: 'local', global: true }],
   },
 
-  modules: ['@nuxt/icon', '@nuxt/fonts'],
+  modules: ['@nuxt/icon', '@nuxt/fonts', '@nuxt/image'],
 
 })
