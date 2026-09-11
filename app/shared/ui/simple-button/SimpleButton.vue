@@ -88,7 +88,9 @@ const hasIcon = computed(() => (showIcon || variant === "icon") && icon)
 
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 
   @include transition((background, outline, color));
 
