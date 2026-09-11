@@ -39,7 +39,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-  title: "Shared/UI/HeroBanner",
+  title: "Widgets/HeroBanner",
 } satisfies Meta<typeof HeroBanner>
 
 export default meta
