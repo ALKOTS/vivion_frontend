@@ -75,7 +75,7 @@ export default defineNuxtConfig({
 
   fonts: {
     defaults: {
-      weights: [300, 500],
+      weights: [300, 400, 500],
       styles: ['normal', 'italic'],
     },
     families: [{ name: 'Suisse Intl', provider: 'local', global: true }],

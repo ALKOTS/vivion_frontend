@@ -49,7 +49,7 @@ const nonPrimaryProducts = computed(() => {
 
   // hasProducts предполагает, что продукты точно существуют, поэтому "!"
   return hasPrimaryProduct.value
-    ? props.products!.toSpliced(primaryProductIndex.value!)
+    ? props.products!.toSpliced(primaryProductIndex.value!, 1)
     : props.products!
 })
 
@@ -79,6 +79,10 @@ const hasMore = computed(
           {{ productsCount }}
         </div>
       </div>
+
+      <p v-if="description" class="product-shelf__description">
+        {{ description }}
+      </p>
     </div>
 
     <div v-if="hasProducts" class="product-shelf__listing">
@@ -108,7 +112,7 @@ const hasMore = computed(
       </ListingProductItem>
 
       <div v-if="hasMore" class="product-shelf__item product-shelf__has-more">
-        link
+        {{ `Смотреть все +${productsCount - nonPrimaryProductsFit}` }}
       </div>
     </div>
   </div>
@@ -133,7 +137,7 @@ const hasMore = computed(
   }
 
   &__title {
-    @include text-style("headeing-24-medium");
+    @include text-style("heading-24-medium");
   }
 
   &__count {
