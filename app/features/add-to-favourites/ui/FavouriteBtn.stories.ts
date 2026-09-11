@@ -20,7 +20,7 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-  title: "Entities/ProductItem/FavouriteBtn",
+  title: "Features/AddToFavourites/FavouriteBtn",
 } satisfies Meta<typeof FavouriteBtn>
 
 export default meta

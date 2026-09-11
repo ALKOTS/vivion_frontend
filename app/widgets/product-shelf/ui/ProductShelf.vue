@@ -60,6 +60,12 @@ const productsCount = computed(() =>
 
 const nonPrimaryProductsFit = computed(() => (hasPrimaryProduct.value ? 4 : 8))
 
+const nonPrimaryProductsToRender = computed(() =>
+  hasMore.value
+    ? nonPrimaryProducts.value.slice(0, nonPrimaryProductsFit.value - 1)
+    : nonPrimaryProducts.value,
+)
+
 const hasMore = computed(
   () =>
     nonPrimaryProducts.value.length > nonPrimaryProductsFit.value ||
@@ -99,11 +105,9 @@ const hasMore = computed(
       </ListingProductItem>
 
       <ListingProductItem
-        v-for="(product, index) in hasMore
-          ? nonPrimaryProducts.slice(0, nonPrimaryProductsFit)
-          : nonPrimaryProducts"
+        v-for="product in nonPrimaryProductsToRender"
         v-bind="product"
-        :key="index"
+        :key="product.id"
         class="product-shelf__item"
       >
         <template #action>
@@ -111,9 +115,13 @@ const hasMore = computed(
         </template>
       </ListingProductItem>
 
-      <div v-if="hasMore" class="product-shelf__item product-shelf__has-more">
-        {{ `Смотреть все +${productsCount - nonPrimaryProductsFit}` }}
-      </div>
+      <TextButtonSpecial
+        v-if="hasMore"
+        :badge="`+${productsCount - nonPrimaryProductsToRender.length - Number(hasPrimaryProduct)}`"
+        class="product-shelf__item product-shelf__has-more"
+        text="Смотреть все"
+        variant="badge"
+      />
     </div>
   </div>
 </template>
@@ -156,6 +164,7 @@ const hasMore = computed(
   &__listing {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
     gap: var(--spacing-8);
   }
 
@@ -164,6 +173,11 @@ const hasMore = computed(
       grid-row: 1/3;
       grid-column: 1/3;
     }
+  }
+
+  &__has-more {
+    align-self: center;
+    justify-self: center;
   }
 }
 </style>

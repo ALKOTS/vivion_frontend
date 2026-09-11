@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
+import SimpleButton from "~/shared/ui/simple-button/SimpleButton.vue"
+
 import type { Product } from "../model/types"
 
-import FavouriteBtn from "./FavouriteBtn.vue"
 import ListingProductItem from "./ListingProductItem.vue"
 
 const product = {
@@ -95,13 +96,13 @@ export const WithAction: Story = {
   args: { ...product },
   name: "Со слотом действия",
   render: (args) => ({
-    components: { FavouriteBtn, ListingProductItem },
+    components: { ListingProductItem, SimpleButton },
     setup: () => ({ args }),
     template: `
       <div style="width: 342px">
         <ListingProductItem v-bind="args">
           <template #action>
-            <FavouriteBtn :id="args.id" />
+            <SimpleButton icon="icons:heart" variant="icon" />
           </template>
         </ListingProductItem>
       </div>
