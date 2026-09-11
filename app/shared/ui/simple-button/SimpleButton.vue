@@ -29,12 +29,16 @@ const {
      * @example `icons:cart`
      */
     icon?: string
+    /**
+     * Состояние загрузки: вместо текста и иконки показывает спиннер.
+     */
+    loading?: boolean
     /** Показывать иконку рядом с текстом; для `variant="icon"` не требуется. */
     showIcon?: boolean
     /**
      * Размер кнопки.
      *
-     * @default m.
+     * @default m
      */
     size?: SimpleButtonSize
     /** Подпись кнопки; игнорируется при `variant="icon"`. */
@@ -56,13 +60,20 @@ const hasIcon = computed(() => (showIcon || variant === "icon") && icon)
 
 <template>
   <button
-    :class="['simple-button', getModifiers(size, variant)]"
+    :class="[
+      'simple-button',
+      getModifiers(size, variant, loading ? 'loading' : ''),
+    ]"
     type="button"
     v-bind="$attrs"
   >
-    <div v-if="hasText" class="simple-button__text">{{ text }}</div>
-    <!-- hasIcon подразумевает наличие иконки, но ts замечает только явную проверку на месте, поэтому "!" -->
-    <Icon v-if="hasIcon" class="simple-button__icon" :name="icon!" />
+    <Spinner v-if="loading" :size="24" />
+
+    <template v-else>
+      <div v-if="hasText" class="simple-button__text">{{ text }}</div>
+      <!-- hasIcon подразумевает наличие иконки, но ts замечает только явную проверку на месте, поэтому "!" -->
+      <Icon v-if="hasIcon" class="simple-button__icon" :name="icon!" />
+    </template>
   </button>
 </template>
 
@@ -134,6 +145,10 @@ const hasIcon = computed(() => (showIcon || variant === "icon") && icon)
         color: var(--brand-marine-600);
       }
     }
+  }
+
+  &._loading {
+    pointer-events: none;
   }
 
   &__text {
