@@ -45,9 +45,13 @@ export default defineNuxtConfig({
     screens: { lg: 1280, md: 768, sm: 320, xl: 1536, xxl: 1920 },
   },
 
-  // Локальные SVG из `app/assets/icons` доступны как <Icon name="icons:cart" />
+  // Локальные SVG доступны через <Icon>: иконки интерфейса — `icons:cart`,
+  // брендовая графика (логотип) — `brand:logo`.
   icon: {
-    customCollections: [{ prefix: 'icons', dir: './app/assets/icons' }],
+    customCollections: [
+      { prefix: 'icons', dir: './app/assets/icons' },
+      { prefix: 'brand', dir: './app/assets/brand' },
+    ],
   },
 
   nitro: {

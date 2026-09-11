@@ -61,10 +61,11 @@ a {
   text-decoration: none;
 }
 
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
+  margin: 0;
   padding: 0;
-  list-style: none;
+  list-style-type: none;
 }
 
 :target {
