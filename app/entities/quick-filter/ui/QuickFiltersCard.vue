@@ -7,9 +7,6 @@ import type { QuickFilter } from "~/entities/quick-filter/model/types"
  * Карточка быстрого фильтра: квадратная картинка на серой подложке и подпись.
  * Карточка целиком — кнопка; принимает любые нативные атрибуты `<button>`.
  *
- * Фото ожидается на белом фоне — за счёт `mix-blend-mode: darken` белый
- * растворяется в подложке, как в макете.
- *
  * @example
  * <QuickFiltersCard v-bind="filter" @click="applyFilter(filter.id)" />
  * <QuickFiltersCard v-bind="filter" :active="filter.id === selected" />
@@ -154,7 +151,6 @@ defineOptions({ inheritAttrs: false })
 
   &__img {
     position: relative;
-    mix-blend-mode: darken;
     width: 100%;
     height: 100%;
 
