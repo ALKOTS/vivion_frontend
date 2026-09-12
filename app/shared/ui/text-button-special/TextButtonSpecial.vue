@@ -92,7 +92,7 @@ const componentAttrs = computed(() =>
     :is="Component"
     :class="[
       'text-button-special',
-      getModifiers(variant, loading ? 'loading' : ''),
+      getModifiers(variant, loading ? 'loading' : undefined),
     ]"
     v-bind="{ ...componentAttrs, ...$attrs }"
   >

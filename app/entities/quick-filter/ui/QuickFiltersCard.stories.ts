@@ -32,8 +32,12 @@ const filters = [
 const [filter] = filters
 
 const meta = {
-  args: { ...filter, disabled: false, loading: false },
+  args: { ...filter, active: false, disabled: false, loading: false },
   argTypes: {
+    active: {
+      control: "boolean",
+      description: "Выбранная карточка: подсвечена так же, как нажатая",
+    },
     disabled: {
       control: "boolean",
       description:
@@ -104,6 +108,16 @@ export const WithoutImage: Story = {
   }),
 }
 
+export const Active: Story = {
+  args: { ...filter, active: true },
+  name: "Выбранная",
+  render: (args) => ({
+    components: { QuickFiltersCard },
+    setup: () => ({ args }),
+    template: `<div style="width: 212px"><QuickFiltersCard v-bind="args" /></div>`,
+  }),
+}
+
 export const Disabled: Story = {
   args: { ...filter, disabled: true },
   name: "Выключенная",
@@ -130,7 +144,7 @@ export const AllStates: Story = {
     docs: {
       description: {
         story:
-          "Hover и active видны только на живой карточке — наведите курсор и зажмите кнопку мыши.",
+          "Hover видно только на живой карточке — наведите курсор. Нажатая карточка выглядит как выбранная.",
       },
     },
   },
@@ -138,8 +152,9 @@ export const AllStates: Story = {
     components: { QuickFiltersCard },
     setup: () => ({ filter }),
     template: `
-      <div style="display: grid; grid-template-columns: repeat(3, 212px); gap: 24px;">
+      <div style="display: grid; grid-template-columns: repeat(4, 212px); gap: 24px;">
         <QuickFiltersCard v-bind="filter" name="Обычная" />
+        <QuickFiltersCard v-bind="filter" name="Выбранная" active />
         <QuickFiltersCard v-bind="filter" name="Выключенная" disabled />
         <QuickFiltersCard v-bind="filter" name="Загрузка" loading />
       </div>

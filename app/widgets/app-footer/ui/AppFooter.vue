@@ -38,7 +38,7 @@ const copyrightYear = new Date().getFullYear()
 
           <ul v-else class="app-footer__group__list">
             <li v-for="link in group.links" :key="link.label">
-              <TextButton :text="link.label" :to="link.to" />
+              <TextButton component="link" :text="link.label" :to="link.to" />
             </li>
           </ul>
         </section>
@@ -56,12 +56,14 @@ const copyrightYear = new Date().getFullYear()
 
       <p class="app-footer__legal">
         <TextButton
+          component="link"
           size="s"
           :text="appFooterLegalLinks.privacyPolicy.label"
           :to="appFooterLegalLinks.privacyPolicy.to"
         />
         <span class="app-footer__legal__separator">и</span>
         <TextButton
+          component="link"
           size="s"
           :text="appFooterLegalLinks.termsOfUse.label"
           :to="appFooterLegalLinks.termsOfUse.to"
