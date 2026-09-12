@@ -90,12 +90,16 @@ const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
 
 <template>
   <div class="index-page">
-    <QuickFiltersGroup
-      :disabled-ids
-      :filters
-      :model-value="selected"
-      @update:model-value="select"
-    />
+    <SectionNav>
+      <QuickFiltersGroup
+        :disabled-ids
+        :filters
+        :model-value="selected"
+        @update:model-value="select"
+      />
+
+      <WrapperFilters />
+    </SectionNav>
 
     <ProductShelf
       v-for="shelf in visibleShelves"

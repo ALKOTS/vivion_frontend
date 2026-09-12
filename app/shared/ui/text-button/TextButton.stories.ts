@@ -3,22 +3,47 @@ import type { Meta, StoryObj } from "@nuxtjs/storybook"
 import TextButton from "./TextButton.vue"
 
 const meta = {
-  args: { disabled: false, size: "m", text: "Доставка" },
+  args: {
+    component: "button",
+    disabled: false,
+    size: "m",
+    text: "Доставка",
+    variant: "secondary",
+  },
   argTypes: {
+    component: {
+      control: "inline-radio",
+      description:
+        "Чем рендерить: `button` — нативная <button>, `link` — <NuxtLink> с адресом из `to`",
+      options: ["button", "link"],
+    },
     disabled: {
       control: "boolean",
       description:
         "Нативный `disabled` у <button>: без hover, курсор not-allowed",
     },
+    icon: {
+      control: "inline-radio",
+      description: "Имя иконки для <Icon> после текста",
+      options: [undefined, "icons:filter", "icons:cart"],
+    },
     size: {
       control: "inline-radio",
-      description: "Размер: `m` — body-14, `s` — body-12",
+      description:
+        "Размер: `m` — body-14, `s` — body-12; на `primary` не влияет",
       options: ["m", "s"],
     },
     text: { control: "text", description: "Подпись кнопки" },
     to: {
       control: "text",
-      description: "Адрес ссылки; если задан, рендерится <NuxtLink>",
+      description:
+        'Адрес ссылки; уходит в <NuxtLink> через `$attrs`, только для `component="link"`',
+    },
+    variant: {
+      control: "inline-radio",
+      description:
+        "Визуальный вариант: `secondary` — обычный текст, `primary` — капс heading-12",
+      options: ["secondary", "primary"],
     },
   },
   component: TextButton,
@@ -26,10 +51,14 @@ const meta = {
     docs: {
       description: {
         component: [
-          "Текстовая кнопка без подчёркивания: пункты навигации подвала,",
-          "служебные ссылки («Политика конфиденциальности»).",
+          "Текстовая кнопка без подчёркивания.",
           "",
-          "С `to` рендерится как `<NuxtLink>`, без него — как `<button>`.",
+          "`secondary` — обычный текст: пункты навигации подвала, служебные",
+          "ссылки («Политика конфиденциальности»). `primary` — капс с иконкой:",
+          "кнопка «Фильтры» над каталогом.",
+          "",
+          'По умолчанию рендерится как `<button>`; с `component="link"` — как',
+          "`<NuxtLink>`, `to` и остальные его пропсы уходят через `$attrs`.",
         ].join("\n"),
       },
     },
@@ -48,8 +77,13 @@ export const Small: Story = {
   name: "Мелкая",
 }
 
+export const Primary: Story = {
+  args: { icon: "icons:filter", text: "Фильтры", variant: "primary" },
+  name: "Primary с иконкой",
+}
+
 export const Link: Story = {
-  args: { text: "Доставка", to: "#" },
+  args: { component: "link", text: "Доставка", to: "#" },
   name: "Ссылка",
 }
 
@@ -63,13 +97,18 @@ export const AllVariants: Story = {
       <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
         <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
           <TextButton text="Доставка" />
-          <TextButton text="Доставка" to="#" />
+          <TextButton component="link" text="Доставка" to="#" />
           <TextButton text="Доставка" disabled />
         </div>
         <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
           <TextButton size="s" text="Политика конфиденциальности" />
-          <TextButton size="s" text="Политика конфиденциальности" to="#" />
+          <TextButton component="link" size="s" text="Политика конфиденциальности" to="#" />
           <TextButton size="s" text="Политика конфиденциальности" disabled />
+        </div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+          <TextButton text="Фильтры" variant="primary" />
+          <TextButton icon="icons:filter" text="Фильтры" variant="primary" />
+          <TextButton icon="icons:filter" text="Фильтры" variant="primary" disabled />
         </div>
       </div>
     `,

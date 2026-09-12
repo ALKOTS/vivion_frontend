@@ -1,18 +1,42 @@
 <script setup lang="ts">
 import type { ButtonHTMLAttributes } from "vue"
 
+import type { NuxtLinkProps } from "#app"
+
+import { NuxtLink } from "#components"
+
+/** Чем рендерить: нативной `<button>` или `<NuxtLink>`. */
+type ButtonComponent = "button" | "link"
+
 type TextButtonSize = "m" | "s"
+
+/** `primary` — капс heading-12, `secondary` — обычный текст body-14 / body-12. */
+type TextButtonVariant = "primary" | "secondary"
 
 /**
  * Текстовая кнопка.
  *
  * @example
- * <TextButton text="Доставка" to="/delivery" />
- * <TextButton size="s" text="Политика конфиденциальности" to="/privacy" />
+ * <TextButton component="link" text="Доставка" to="/delivery" />
+ * <TextButton component="link" size="s" text="Политика конфиденциальности" to="/privacy" />
  * <TextButton text="Показать ещё" @click="loadMore" />
+ * <TextButton icon="icons:filter" text="Фильтры" variant="primary" />
  */
-const { size = "m" } = defineProps<
+const {
+  component = "button",
+  size = "m",
+  variant = "secondary",
+} = defineProps<
   {
+    /**
+     * Чем рендерить: `button` — нативная `<button type="button">`,
+     * `link` — `<NuxtLink>`.
+     *
+     * @default button
+     */
+    component?: ButtonComponent
+    /** Имя иконки для `<Icon>` после текста. */
+    icon?: string
     /**
      * Размер.
      *
@@ -21,32 +45,36 @@ const { size = "m" } = defineProps<
     size?: TextButtonSize
     /** Подпись кнопки. */
     text?: string
-    /** Адрес ссылки; если задан, кнопка становится `<NuxtLink>`. */
-    to?: string
-  } & /* @vue-ignore */ ButtonHTMLAttributes
+    /**
+     * Визуальный вариант.
+     *
+     * @default secondary
+     */
+    variant?: TextButtonVariant
+  } & /* @vue-ignore */ ButtonHTMLAttributes &
+    /* @vue-ignore */ Pick<NuxtLinkProps, "to">
 >()
 
 defineOptions({ inheritAttrs: false })
+
+const isLink = computed(() => component === "link")
+
+const Component = computed(() => (isLink.value ? NuxtLink : "button"))
+
+/** Нативной кнопке нужен `type="button"`; ссылке — ничего, `to` приходит из `$attrs`. */
+const componentAttrs = computed(() => (isLink.value ? {} : { type: "button" }))
 </script>
 
 <template>
-  <NuxtLink
-    v-if="to"
-    :class="['text-button', getModifiers(size)]"
-    :to
-    v-bind="$attrs"
+  <component
+    :is="Component"
+    :class="['text-button', getModifiers(size, variant)]"
+    v-bind="{ ...componentAttrs, ...$attrs }"
   >
     {{ text }}
-  </NuxtLink>
 
-  <button
-    v-else
-    :class="['text-button', getModifiers(size)]"
-    type="button"
-    v-bind="$attrs"
-  >
-    {{ text }}
-  </button>
+    <Icon v-if="icon" class="text-button__icon" :name="icon" size="16" />
+  </component>
 </template>
 
 <style lang="scss" scoped>
@@ -67,6 +95,12 @@ defineOptions({ inheritAttrs: false })
 
   &._s {
     @include text-style("body-12-light");
+  }
+
+  &._primary {
+    text-transform: uppercase;
+
+    @include text-style("heading-12-medium");
   }
 
   @include hover {
