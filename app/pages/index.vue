@@ -4,7 +4,6 @@ import type { Blog } from "~/widgets/blog/model/types"
 import type { ProductShelf } from "~/widgets/product-shelf/model/types"
 import type { SelectionBudget } from "~/widgets/selection-budget/model/types"
 
-/** Контент главной из `public/content/main-page.json`, по полю на секцию. */
 interface MainPageContent {
   blog: Blog
   budget: SelectionBudget
@@ -49,7 +48,7 @@ const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
     </SectionNav>
 
     <!-- Полки разделены линией; у первой её нет, чтобы не дублировать границу навигации -->
-    <ProductShelf
+    <ProductShelfSection
       v-for="(shelf, index) in visibleShelves"
       v-bind="shelf"
       :key="shelf.id"
@@ -66,10 +65,10 @@ const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
       </template>
     </SectionBanner>
 
-    <SelectionBudget v-bind="budget" class="_pb-40" />
+    <SelectionBudgetSection v-bind="budget" class="_pb-40" />
 
     <MediaContent v-bind="consultation" class="_border-top _py-40" />
 
-    <Blog v-bind="blog" class="_border-top _pt-40 _pb-80" />
+    <BlogSection v-bind="blog" class="_border-top _pt-40 _pb-80" />
   </div>
 </template>

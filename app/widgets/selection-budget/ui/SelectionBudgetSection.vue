@@ -7,7 +7,7 @@ type SelectionBudgetTitleTag = `h${2 | 3 | 4 | 5 | 6}`
  * Подборка «По бюджету».
  *
  * @example
- * <SelectionBudget v-bind="budget" title-tag="h3" />
+ * <SelectionBudgetSection v-bind="budget" title-tag="h3" />
  */
 const props = withDefaults(
   defineProps<
@@ -45,17 +45,21 @@ const isLargeCard = (index: number) =>
 </script>
 
 <template>
-  <section class="selection-budget">
-    <component :is="titleTag" v-if="title" class="selection-budget__title">
+  <section class="selection-budget-section">
+    <component
+      :is="titleTag"
+      v-if="title"
+      class="selection-budget-section__title"
+    >
       {{ title }}
     </component>
 
-    <ul v-if="visibleCards.length > 0" class="selection-budget__list">
-      <NavCard
+    <ul v-if="visibleCards.length > 0" class="selection-budget-section__list">
+      <NavCardItem
         v-for="(card, index) in visibleCards"
         v-bind="card"
         :key="index"
-        class="selection-budget__card"
+        class="selection-budget-section__card"
         component="li"
         :size="isLargeCard(index) ? 'l' : 's'"
       />
@@ -64,7 +68,7 @@ const isLargeCard = (index: number) =>
 </template>
 
 <style lang="scss" scoped>
-.selection-budget {
+.selection-budget-section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-24);

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
-import SimpleButton from "../simple-button/SimpleButton.vue"
+import SimpleButton from "~/shared/ui/simple-button/SimpleButton.vue"
+
 import SectionBanner from "./SectionBanner.vue"
 
 const banner = {
@@ -60,7 +61,7 @@ const meta = {
     `,
   }),
   tags: ["autodocs"],
-  title: "Shared/UI/SectionBanner",
+  title: "Widgets/SectionBanner",
 } satisfies Meta<typeof SectionBanner>
 
 export default meta

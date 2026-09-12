@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
 import type { SelectionBudget as SelectionBudgetProps } from "../model/types"
 
-import SelectionBudget from "./SelectionBudget.vue"
+import SelectionBudgetSection from "./SelectionBudgetSection.vue"
 
 type Card = NonNullable<SelectionBudgetProps["cards"]>[number]
 
@@ -52,7 +52,7 @@ const meta = {
       options: ["h2", "h3", "h4", "h5", "h6"],
     },
   },
-  component: SelectionBudget,
+  component: SelectionBudgetSection,
   parameters: {
     docs: {
       description: {
@@ -68,13 +68,13 @@ const meta = {
     layout: "fullscreen",
   },
   render: (args) => ({
-    components: { SelectionBudget },
+    components: { SelectionBudgetSection },
     setup: () => ({ args }),
-    template: `<div style="padding: 24px"><SelectionBudget v-bind="args" /></div>`,
+    template: `<div style="padding: 24px"><SelectionBudgetSection v-bind="args" /></div>`,
   }),
   tags: ["autodocs"],
-  title: "Widgets/SelectionBudget",
-} satisfies Meta<typeof SelectionBudget>
+  title: "Widgets/SelectionBudgetSection",
+} satisfies Meta<typeof SelectionBudgetSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

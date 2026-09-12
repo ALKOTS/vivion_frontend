@@ -7,7 +7,7 @@ type NavCardComponent = "div" | "li"
  * Навигационная карточка.
  *
  * @example
- * <NavCard v-bind="card" component="li" />
+ * <NavCardItem v-bind="card" component="li" />
  */
 const props = withDefaults(
   defineProps<
@@ -31,29 +31,29 @@ const imgAttrs = computed(() =>
 </script>
 
 <template>
-  <component :is="component" class="nav-card">
-    <NuxtLink class="nav-card__link" :to>
+  <component :is="component" class="nav-card-item">
+    <NuxtLink class="nav-card-item__link" :to>
       <NuxtImg
         v-if="img"
         :alt="title || label"
-        class="nav-card__img"
+        class="nav-card-item__img"
         format="webp"
         loading="lazy"
         :src="img"
         v-bind="imgAttrs"
       />
 
-      <div v-if="title && size === 'l'" class="nav-card__title">
+      <div v-if="title && size === 'l'" class="nav-card-item__title">
         {{ title }}
       </div>
 
-      <div v-if="label" class="nav-card__label">{{ label }}</div>
+      <div v-if="label" class="nav-card-item__label">{{ label }}</div>
     </NuxtLink>
   </component>
 </template>
 
 <style lang="scss" scoped>
-.nav-card {
+.nav-card-item {
   $root: &;
 
   @include hover {

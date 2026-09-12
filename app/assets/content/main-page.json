@@ -1,272 +1,28 @@
 {
-  "hero": {
-    "img": "/images/hero-rings.png",
-    "text": "Мы создаём помолвочные кольца с бриллиантами, достойные вашей истории любви. Каждое кольцо выполнено с непревзойдённым мастерством в соответствии с нашими строгими стандартами.",
-    "title": "Помолвочные кольца с бриллиантами"
-  },
-  "filters": [
-    {
-      "id": "classic",
-      "img": "/images/quick-filters/classic.png",
-      "name": "Классические"
-    },
-    {
-      "id": "pave",
-      "img": "/images/quick-filters/pave.png",
-      "name": "С бриллиантовой дорожкой"
-    },
-    {
-      "id": "three-stone",
-      "img": "/images/quick-filters/three-stone.png",
-      "name": "С тремя камнями"
-    },
-    {
-      "id": "halo",
-      "img": "/images/quick-filters/halo.png",
-      "name": "С ободком halo"
-    },
-    {
-      "id": "exclusive",
-      "img": "/images/quick-filters/exclusive.png",
-      "name": "Эксклюзивные помолвочные кольца"
-    },
-    {
-      "id": "all",
-      "img": "/images/quick-filters/all.png",
-      "name": "Смотреть всё"
-    }
-  ],
-  "shelves": [
-    {
-      "description": "Классические кольца с одним бриллиантом выбирают, когда хочется точной формы, которая легко считывается как помолвочная и хорошо выглядит каждый день. Универсальный выбор, подходящий всем.",
-      "id": "classic",
-      "products": [
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "classic-main",
-          "img": "/images/products/classic-main.jpg",
-          "primary": true,
-          "productType": "Помолвочное кольцо огранка круг"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "classic-1",
-          "img": "/images/products/classic-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "classic-2",
-          "img": "/images/products/classic-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "classic-3",
-          "img": "/images/products/classic-item.jpg",
-          "productType": "Помолвочное кольцо"
-        }
-      ],
-      "title": "Классические",
-      "total": 28
-    },
-    {
-      "description": "Кольца с бриллиантовой дорожкой подойдут девушке, которая хочет более заметное сияние на руке. Маленькие бриллианты по бокам усиливают центральный камень и делают кольцо выразительнее, поэтому это хороший выбор, если ей нравятся изящные, но не слишком простые украшения.",
-      "id": "pave",
-      "products": [
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "pave-main",
-          "img": "/images/products/pave-main.jpg",
-          "primary": true,
-          "productType": "Помолвочное кольцо огранка круг"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "pave-1",
-          "img": "/images/products/pave-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "pave-2",
-          "img": "/images/products/pave-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "pave-3",
-          "img": "/images/products/pave-item.jpg",
-          "productType": "Помолвочное кольцо"
-        }
-      ],
-      "title": "С бриллиантовой дорожкой",
-      "total": 28
-    },
-    {
-      "description": "Кольца с тремя камнями подойдут девушке, которой хочется, чтобы кольцо выглядело крупнее и заметнее на руке. Боковые бриллианты добавляют ширину и сияние вокруг центрального камня, поэтому модель смотрится более объёмной и торжественной, чем классическое кольцо с одним бриллиантом.",
-      "id": "three-stone",
-      "products": [
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "three-stone-main",
-          "img": "/images/products/three-stone-main.jpg",
-          "primary": true,
-          "productType": "Помолвочное кольцо огранка круг"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "three-stone-1",
-          "img": "/images/products/three-stone-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "three-stone-2",
-          "img": "/images/products/three-stone-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "three-stone-3",
-          "img": "/images/products/three-stone-item.jpg",
-          "productType": "Помолвочное кольцо"
-        }
-      ],
-      "title": "С тремя камнями",
-      "total": 28
-    },
-    {
-      "description": "Мелкие бриллианты вокруг визуально увеличивают главный камень и делают кольцо намного более выразительным, поэтому это хороший выбор, если ей нравятся украшения, которые сразу видны на руке.",
-      "id": "halo",
-      "products": [
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "halo-main",
-          "img": "/images/products/halo-main.jpg",
-          "primary": true,
-          "productType": "Помолвочное кольцо огранка круг"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "halo-1",
-          "img": "/images/products/halo-item.png",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "halo-2",
-          "img": "/images/products/halo-item.png",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "halo-3",
-          "img": "/images/products/halo-item.png",
-          "productType": "Помолвочное кольцо"
-        }
-      ],
-      "title": "С ободком halo",
-      "total": 28
-    },
-    {
-      "description": "Мелкие бриллианты вокруг визуально увеличивают главный камень и делают кольцо намного более выразительным, поэтому это хороший выбор, если ей нравятся украшения, которые сразу видны на руке.",
-      "id": "exclusive",
-      "products": [
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "exclusive-main",
-          "img": "/images/products/exclusive-main.jpg",
-          "primary": true,
-          "productType": "Помолвочное кольцо огранка круг"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "exclusive-1",
-          "img": "/images/products/exclusive-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "exclusive-2",
-          "img": "/images/products/exclusive-item.jpg",
-          "productType": "Помолвочное кольцо"
-        },
-        {
-          "materials": ["white", "yellow", "rose", "platinum"],
-          "name": "Lyre / Лира",
-          "price": "от 166 350 ₽",
-          "trademark": "Placeholder",
-          "id": "exclusive-3",
-          "img": "/images/products/exclusive-item.jpg",
-          "productType": "Помолвочное кольцо"
-        }
-      ],
-      "title": "Эксклюзивные помолвочные кольца",
-      "total": 28
-    }
-  ],
-  "sizeBanner": {
-    "img": "/images/section-banner-rings.png",
-    "text": "Можно воспользоваться онлайн‑измерителем, обратиться к эксперту или прийти в бутик с её кольцом.",
-    "title": "Не знаете размер?"
+  "blog": {
+    "cards": [
+      {
+        "id": "how-to-choose-engagement-ring",
+        "img": "/images/articles/how-to-choose-engagement-ring.png",
+        "tags": ["Помолвка и свадьба", "Гид"],
+        "title": "Как выбрать помолвочное кольцо"
+      },
+      {
+        "id": "diamond-origin",
+        "img": "/images/articles/diamond-origin.jpg",
+        "tags": ["Помолвка и свадьба"],
+        "title": "Происхождение бриллиантов LA VIVION"
+      },
+      {
+        "id": "four-c",
+        "img": "/images/articles/four-c.jpg",
+        "tags": ["Помолвка и свадьба"],
+        "title": "4C — карат, цвет и чистота"
+      }
+    ],
+    "count": 126,
+    "title": "Блог",
+    "to": "/blog"
   },
   "budget": {
     "cards": [
@@ -306,29 +62,273 @@
     "imgAlt": "Эксперт LA VIVION с лупой и кольцом",
     "title": "Посмотреть кольцо перед покупкой"
   },
-  "blog": {
-    "cards": [
-      {
-        "id": "how-to-choose-engagement-ring",
-        "img": "/images/articles/how-to-choose-engagement-ring.png",
-        "tags": ["Помолвка и свадьба", "Гид"],
-        "title": "Как выбрать помолвочное кольцо"
-      },
-      {
-        "id": "diamond-origin",
-        "img": "/images/articles/diamond-origin.jpg",
-        "tags": ["Помолвка и свадьба"],
-        "title": "Происхождение бриллиантов LA VIVION"
-      },
-      {
-        "id": "four-c",
-        "img": "/images/articles/four-c.jpg",
-        "tags": ["Помолвка и свадьба"],
-        "title": "4C — карат, цвет и чистота"
-      }
-    ],
-    "count": 126,
-    "title": "Блог",
-    "to": "/blog"
+  "filters": [
+    {
+      "id": "classic",
+      "img": "/images/quick-filters/classic.png",
+      "name": "Классические"
+    },
+    {
+      "id": "pave",
+      "img": "/images/quick-filters/pave.png",
+      "name": "С бриллиантовой дорожкой"
+    },
+    {
+      "id": "three-stone",
+      "img": "/images/quick-filters/three-stone.png",
+      "name": "С тремя камнями"
+    },
+    {
+      "id": "halo",
+      "img": "/images/quick-filters/halo.png",
+      "name": "С ободком halo"
+    },
+    {
+      "id": "exclusive",
+      "img": "/images/quick-filters/exclusive.png",
+      "name": "Эксклюзивные помолвочные кольца"
+    },
+    {
+      "id": "all",
+      "img": "/images/quick-filters/all.png",
+      "name": "Смотреть всё"
+    }
+  ],
+  "hero": {
+    "img": "/images/hero-rings.png",
+    "text": "Мы создаём помолвочные кольца с бриллиантами, достойные вашей истории любви. Каждое кольцо выполнено с непревзойдённым мастерством в соответствии с нашими строгими стандартами.",
+    "title": "Помолвочные кольца с бриллиантами"
+  },
+  "shelves": [
+    {
+      "description": "Классические кольца с одним бриллиантом выбирают, когда хочется точной формы, которая легко считывается как помолвочная и хорошо выглядит каждый день. Универсальный выбор, подходящий всем.",
+      "id": "classic",
+      "products": [
+        {
+          "id": "classic-main",
+          "img": "/images/products/classic-main.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "primary": true,
+          "productType": "Помолвочное кольцо огранка круг",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "classic-1",
+          "img": "/images/products/classic-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "classic-2",
+          "img": "/images/products/classic-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "classic-3",
+          "img": "/images/products/classic-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        }
+      ],
+      "title": "Классические",
+      "total": 28
+    },
+    {
+      "description": "Кольца с бриллиантовой дорожкой подойдут девушке, которая хочет более заметное сияние на руке. Маленькие бриллианты по бокам усиливают центральный камень и делают кольцо выразительнее, поэтому это хороший выбор, если ей нравятся изящные, но не слишком простые украшения.",
+      "id": "pave",
+      "products": [
+        {
+          "id": "pave-main",
+          "img": "/images/products/pave-main.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "primary": true,
+          "productType": "Помолвочное кольцо огранка круг",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "pave-1",
+          "img": "/images/products/pave-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "pave-2",
+          "img": "/images/products/pave-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "pave-3",
+          "img": "/images/products/pave-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        }
+      ],
+      "title": "С бриллиантовой дорожкой",
+      "total": 28
+    },
+    {
+      "description": "Кольца с тремя камнями подойдут девушке, которой хочется, чтобы кольцо выглядело крупнее и заметнее на руке. Боковые бриллианты добавляют ширину и сияние вокруг центрального камня, поэтому модель смотрится более объёмной и торжественной, чем классическое кольцо с одним бриллиантом.",
+      "id": "three-stone",
+      "products": [
+        {
+          "id": "three-stone-main",
+          "img": "/images/products/three-stone-main.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "primary": true,
+          "productType": "Помолвочное кольцо огранка круг",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "three-stone-1",
+          "img": "/images/products/three-stone-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "three-stone-2",
+          "img": "/images/products/three-stone-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "three-stone-3",
+          "img": "/images/products/three-stone-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        }
+      ],
+      "title": "С тремя камнями",
+      "total": 28
+    },
+    {
+      "description": "Мелкие бриллианты вокруг визуально увеличивают главный камень и делают кольцо намного более выразительным, поэтому это хороший выбор, если ей нравятся украшения, которые сразу видны на руке.",
+      "id": "halo",
+      "products": [
+        {
+          "id": "halo-main",
+          "img": "/images/products/halo-main.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "primary": true,
+          "productType": "Помолвочное кольцо огранка круг",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "halo-1",
+          "img": "/images/products/halo-item.png",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "halo-2",
+          "img": "/images/products/halo-item.png",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "halo-3",
+          "img": "/images/products/halo-item.png",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        }
+      ],
+      "title": "С ободком halo",
+      "total": 28
+    },
+    {
+      "description": "Мелкие бриллианты вокруг визуально увеличивают главный камень и делают кольцо намного более выразительным, поэтому это хороший выбор, если ей нравятся украшения, которые сразу видны на руке.",
+      "id": "exclusive",
+      "products": [
+        {
+          "id": "exclusive-main",
+          "img": "/images/products/exclusive-main.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "primary": true,
+          "productType": "Помолвочное кольцо огранка круг",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "exclusive-1",
+          "img": "/images/products/exclusive-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "exclusive-2",
+          "img": "/images/products/exclusive-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        },
+        {
+          "id": "exclusive-3",
+          "img": "/images/products/exclusive-item.jpg",
+          "materials": ["white", "yellow", "rose", "platinum"],
+          "name": "Lyre / Лира",
+          "price": "от 166 350 ₽",
+          "productType": "Помолвочное кольцо",
+          "trademark": "Placeholder"
+        }
+      ],
+      "title": "Эксклюзивные помолвочные кольца",
+      "total": 28
+    }
+  ],
+  "sizeBanner": {
+    "img": "/images/section-banner-rings.png",
+    "text": "Можно воспользоваться онлайн‑измерителем, обратиться к эксперту или прийти в бутик с её кольцом.",
+    "title": "Не знаете размер?"
   }
 }

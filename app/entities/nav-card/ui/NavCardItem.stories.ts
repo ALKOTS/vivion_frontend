@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
 import type { NavCard as NavCardProps } from "../model/types"
 
-import NavCard from "./NavCard.vue"
+import NavCardItem from "./NavCardItem.vue"
 
 const card = {
   img: "/images/nav-cards/budget-1.jpg",
@@ -56,7 +56,7 @@ const meta = {
     },
     to: { control: "text", description: "Адрес ссылки" },
   },
-  component: NavCard,
+  component: NavCardItem,
   parameters: {
     docs: {
       description: {
@@ -71,8 +71,8 @@ const meta = {
     },
   },
   tags: ["autodocs"],
-  title: "Entities/NavCard/NavCard",
-} satisfies Meta<typeof NavCard>
+  title: "Entities/NavCard/NavCardItem",
+} satisfies Meta<typeof NavCardItem>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -80,9 +80,9 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   name: "Обычная карточка",
   render: (args) => ({
-    components: { NavCard },
+    components: { NavCardItem },
     setup: () => ({ args }),
-    template: `<div style="width: 330px"><NavCard v-bind="args" /></div>`,
+    template: `<div style="width: 330px"><NavCardItem v-bind="args" /></div>`,
   }),
 }
 
@@ -94,9 +94,9 @@ export const WithTitle: Story = {
   },
   name: "С заголовком",
   render: (args) => ({
-    components: { NavCard },
+    components: { NavCardItem },
     setup: () => ({ args }),
-    template: `<div style="width: 330px"><NavCard v-bind="args" /></div>`,
+    template: `<div style="width: 330px"><NavCardItem v-bind="args" /></div>`,
   }),
 }
 
@@ -104,9 +104,9 @@ export const WithoutImage: Story = {
   args: { ...card, img: undefined },
   name: "Без картинки",
   render: (args) => ({
-    components: { NavCard },
+    components: { NavCardItem },
     setup: () => ({ args }),
-    template: `<div style="width: 330px"><NavCard v-bind="args" /></div>`,
+    template: `<div style="width: 330px"><NavCardItem v-bind="args" /></div>`,
   }),
 }
 
@@ -114,11 +114,11 @@ export const InList: Story = {
   args: { ...card, component: "li" },
   name: "В списке",
   render: () => ({
-    components: { NavCard },
+    components: { NavCardItem },
     setup: () => ({ cards }),
     template: `
       <ul style="display: grid; grid-template-columns: repeat(4, 330px); gap: 24px; margin: 0; padding: 0; list-style: none;">
-        <NavCard v-for="card in cards" :key="card.to" v-bind="card" component="li" />
+        <NavCardItem v-for="card in cards" :key="card.to" v-bind="card" component="li" />
       </ul>
     `,
   }),

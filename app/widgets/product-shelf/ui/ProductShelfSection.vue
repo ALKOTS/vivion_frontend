@@ -7,7 +7,7 @@ type ProductShelfTitleTag = `h${2 | 3 | 4 | 5 | 6}`
  * Полка товаров.
  *
  * @example
- * <ProductShelf v-bind="shelf" title-tag="h3" />
+ * <ProductShelfSection v-bind="shelf" title-tag="h3" />
  */
 const props = withDefaults(
   defineProps<
@@ -80,29 +80,29 @@ const hasMore = computed(
 </script>
 
 <template>
-  <section class="product-shelf">
-    <div v-if="title || description" class="product-shelf__header">
-      <div v-if="title" class="product-shelf__title-wrapper">
-        <component :is="titleTag" class="product-shelf__title">
+  <section class="product-shelf-section">
+    <div v-if="title || description" class="product-shelf-section__header">
+      <div v-if="title" class="product-shelf-section__title-wrapper">
+        <component :is="titleTag" class="product-shelf-section__title">
           {{ title }}
         </component>
 
-        <div v-if="productsCount > 0" class="product-shelf__count">
+        <div v-if="productsCount > 0" class="product-shelf-section__count">
           {{ productsCount }}
         </div>
       </div>
 
-      <p v-if="description" class="product-shelf__description">
+      <p v-if="description" class="product-shelf-section__description">
         {{ description }}
       </p>
     </div>
 
-    <div v-if="hasProducts" class="product-shelf__listing">
+    <div v-if="hasProducts" class="product-shelf-section__listing">
       <!-- hasProducts предполагает, что продукты точно существуют, поэтому "!" -->
       <ListingProductItem
         v-if="primaryProduct"
         v-bind="primaryProduct"
-        class="product-shelf__item _primary-product"
+        class="product-shelf-section__item _primary-product"
         size="l"
       >
         <template #action>
@@ -114,7 +114,7 @@ const hasMore = computed(
         v-for="product in nonPrimaryProductsToRender"
         v-bind="product"
         :key="product.id"
-        class="product-shelf__item"
+        class="product-shelf-section__item"
       >
         <template #action>
           <FavouriteBtn :id="product.id" />
@@ -124,7 +124,7 @@ const hasMore = computed(
       <TextButtonSpecial
         v-if="hasMore"
         :badge="`+${productsCount - nonPrimaryProductsToRender.length - Number(hasPrimaryProduct)}`"
-        class="product-shelf__item product-shelf__has-more"
+        class="product-shelf-section__item product-shelf-section__has-more"
         text="Смотреть все"
         variant="badge"
       />
@@ -133,7 +133,7 @@ const hasMore = computed(
 </template>
 
 <style lang="scss" scoped>
-.product-shelf {
+.product-shelf-section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-24);
