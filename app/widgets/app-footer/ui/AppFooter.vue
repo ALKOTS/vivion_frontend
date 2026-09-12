@@ -10,6 +10,7 @@ const copyrightYear = new Date().getFullYear()
 
 <template>
   <footer class="app-footer">
+    <h2 class="visually-hidden">Карта сайта</h2>
     <nav aria-label="Карта сайта" class="app-footer__nav">
       <div
         v-for="(column, columnIndex) in appFooterNavigation"
@@ -21,7 +22,7 @@ const copyrightYear = new Date().getFullYear()
           :key="group.title"
           class="app-footer__group"
         >
-          <h2 class="app-footer__group__title">{{ group.title }}</h2>
+          <h3 class="app-footer__group__title">{{ group.title }}</h3>
 
           <ul v-if="'socials' in group" class="app-footer__socials">
             <li v-for="social in group.socials" :key="social.icon">

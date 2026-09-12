@@ -34,7 +34,7 @@ const hasSide = computed(() => Boolean(props.title) || hasMore.value)
 </script>
 
 <template>
-  <div class="blog">
+  <section class="blog">
     <div v-if="hasSide" class="blog__side">
       <component :is="titleTag" v-if="title" class="blog__title">
         {{ title }}
@@ -60,7 +60,7 @@ const hasSide = computed(() => Boolean(props.title) || hasMore.value)
         component="li"
       />
     </ul>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

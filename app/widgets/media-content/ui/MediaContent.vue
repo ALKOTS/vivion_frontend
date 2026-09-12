@@ -55,7 +55,7 @@ const hasText = computed(
 </script>
 
 <template>
-  <div class="media-content">
+  <section class="media-content">
     <div v-if="hasText" class="media-content__text">
       <component :is="titleTag" v-if="title" class="media-content__title">
         {{ title }}
@@ -96,7 +96,7 @@ const hasText = computed(
         {{ caption }}
       </figcaption>
     </figure>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

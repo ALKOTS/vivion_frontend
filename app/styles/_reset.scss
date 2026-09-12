@@ -82,3 +82,14 @@ ol {
     scroll-behavior: auto !important;
   }
 }
+
+.visually-hidden {
+  position: absolute;
+  z-index: -1;
+  margin: 0;
+  border: none;
+  padding: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}

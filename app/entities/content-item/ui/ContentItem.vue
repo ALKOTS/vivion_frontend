@@ -4,12 +4,15 @@ import type { Article } from "~/entities/content-item/model/types"
 /** Тег обёртки. */
 type ContentItemComponent = "div" | "li"
 
+type TitleTag = `h${2 | 3 | 4 | 5 | 6}`
+
 /**
  * Карточка контента.
  * Карточка целиком.
  *
  * @example
  * <ContentItem v-bind="article" component="li" />
+ * <ContentItem v-bind="article" title-tag="h4" />
  */
 withDefaults(
   defineProps<
@@ -20,9 +23,15 @@ withDefaults(
        * @default div
        */
       component?: ContentItemComponent
+      /**
+       * Тег заголовка.
+       *
+       * @default h3
+       */
+      titleTag?: TitleTag
     } & Article
   >(),
-  { component: "div" },
+  { component: "div", titleTag: "h3" },
 )
 </script>
 
@@ -51,7 +60,14 @@ withDefaults(
           <Badge v-for="tag in tags" :key="tag" :text="tag" />
         </div>
 
-        <div v-if="title" class="content-item__title" v-html="title" />
+        <!-- eslint-disable vue/no-v-html, vue/no-v-text-v-html-on-component -->
+        <component
+          :is="titleTag"
+          v-if="title"
+          class="content-item__title"
+          v-html="title"
+        />
+        <!-- eslint-enable vue/no-v-html, vue/no-v-text-v-html-on-component -->
 
         <p v-if="description" class="content-item__description">
           {{ description }}

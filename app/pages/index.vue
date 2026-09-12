@@ -1,86 +1,30 @@
 <script setup lang="ts">
-import type { Product } from "~/entities/product-item/model/types"
 import type { QuickFilter } from "~/entities/quick-filter/model/types"
+import type { Blog } from "~/widgets/blog/model/types"
 import type { ProductShelf } from "~/widgets/product-shelf/model/types"
+import type { SelectionBudget } from "~/widgets/selection-budget/model/types"
+
+/** Контент главной из `public/content/main-page.json`, по полю на секцию. */
+interface MainPageContent {
+  blog: Blog
+  budget: SelectionBudget
+  consultation: {
+    buttonText: string
+    description: string
+    img: string
+    imgAlt: string
+    title: string
+  }
+  filters: QuickFilter[]
+  hero: { img: string; text: string; title: string }
+  shelves: ProductShelf[]
+  sizeBanner: { img: string; text: string; title: string }
+}
 
 useHead({ title: "LaVivion" })
 
-const filters: QuickFilter[] = [
-  {
-    id: "classic",
-    img: "/images/quick-filters/classic.png",
-    name: "Классические",
-  },
-  {
-    id: "pave",
-    img: "/images/quick-filters/pave.png",
-    name: "С бриллиантовой дорожкой",
-  },
-  {
-    id: "three-stone",
-    img: "/images/quick-filters/three-stone.png",
-    name: "С тремя камнями",
-  },
-  { id: "halo", img: "/images/quick-filters/halo.png", name: "С ободком halo" },
-  {
-    id: "exclusive",
-    img: "/images/quick-filters/exclusive.png",
-    name: "Эксклюзивные помолвочные кольца",
-  },
-  { id: "all", img: "/images/quick-filters/all.png", name: "Смотреть всё" },
-]
-
-const ring = {
-  img: "/images/ring1.png",
-  materials: ["white", "yellow", "rose", "platinum"],
-  name: "Lyre / Лира",
-  price: "от 166 350 ₽",
-  productType: "Помолвочное кольцо",
-  trademark: "Placeholder",
-} satisfies Omit<Product, "id">
-
-/**
- * Генерирует товары для полки; первый — главный.
- *
- * @param shelfId Идентификатор полки, чтобы `id` товаров не повторялись между полками.
- * @param count Сколько товаров.
- * @returns Массив товаров.
- */
-const makeProducts = (shelfId: string, count: number): Product[] =>
-  Array.from({ length: count }, (_, index) => ({
-    ...ring,
-    id: `${shelfId}-${index + 1}`,
-    ...(index === 0 ? { img: "/images/ring2.png", primary: true } : {}),
-  }))
-
-const shelves: ProductShelf[] = [
-  {
-    description:
-      "Классические кольца с одним бриллиантом выбирают, когда хочется точной формы, которая легко считывается как помолвочная и хорошо выглядит каждый день.",
-    id: "classic",
-    products: makeProducts("classic", 5),
-    title: "Классические",
-    total: 28,
-  },
-  {
-    description:
-      "Дорожка из бриллиантов по шинке добавляет кольцу света, не отвлекая от центрального камня.",
-    id: "pave",
-    products: makeProducts("pave", 5),
-    title: "С бриллиантовой дорожкой",
-    total: 16,
-  },
-  {
-    description:
-      "Центральный камень в обрамлении двух боковых: символ прошлого, настоящего и будущего.",
-    id: "three-stone",
-    products: makeProducts("three-stone", 4),
-    title: "С тремя камнями",
-    total: 9,
-  },
-  { id: "halo", products: [], title: "С ободком halo" },
-  { id: "exclusive", products: [], title: "Эксклюзивные помолвочные кольца" },
-]
+const { blog, budget, consultation, filters, hero, shelves, sizeBanner } =
+  getPageContent<MainPageContent>("main-page")
 
 const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
   filters,
@@ -90,6 +34,9 @@ const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
 
 <template>
   <div class="index-page page">
+    <h1 class="visually-hidden">Главная страница</h1>
+    <HeroBanner v-bind="hero" title-tag="h2" />
+
     <SectionNav class="_pt-40">
       <QuickFiltersGroup
         :disabled-ids
@@ -101,11 +48,28 @@ const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
       <WrapperFilters />
     </SectionNav>
 
+    <!-- Полки разделены линией; у первой её нет, чтобы не дублировать границу навигации -->
     <ProductShelf
-      v-for="shelf in visibleShelves"
+      v-for="(shelf, index) in visibleShelves"
       v-bind="shelf"
       :key="shelf.id"
-      class="index-page__shelf"
+      class="_py-40"
+      :class="{ '_border-top': index > 0 }"
+      title-tag="h3"
     />
+
+    <SectionBanner v-bind="sizeBanner" class="_py-40">
+      <template #actions>
+        <SimpleButton text="Открыть измеритель" variant="secondary-outline" />
+
+        <SimpleButton text="Связаться с экспертом" />
+      </template>
+    </SectionBanner>
+
+    <SelectionBudget v-bind="budget" class="_pb-40" />
+
+    <MediaContent v-bind="consultation" class="_border-top _py-40" />
+
+    <Blog v-bind="blog" class="_border-top _pt-40 _pb-80" />
   </div>
 </template>

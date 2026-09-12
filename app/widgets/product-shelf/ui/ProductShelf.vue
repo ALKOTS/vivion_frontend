@@ -3,6 +3,12 @@ import type { ProductShelf } from "~/widgets/product-shelf/model/types"
 
 type ProductShelfTitleTag = `h${2 | 3 | 4 | 5 | 6}`
 
+/**
+ * Полка товаров.
+ *
+ * @example
+ * <ProductShelf v-bind="shelf" title-tag="h3" />
+ */
 const props = withDefaults(
   defineProps<
     {
@@ -74,7 +80,7 @@ const hasMore = computed(
 </script>
 
 <template>
-  <div class="product-shelf">
+  <section class="product-shelf">
     <div v-if="title || description" class="product-shelf__header">
       <div v-if="title" class="product-shelf__title-wrapper">
         <component :is="titleTag" class="product-shelf__title">
@@ -123,7 +129,7 @@ const hasMore = computed(
         variant="badge"
       />
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

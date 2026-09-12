@@ -45,7 +45,7 @@ const isLargeCard = (index: number) =>
 </script>
 
 <template>
-  <div class="selection-budget">
+  <section class="selection-budget">
     <component :is="titleTag" v-if="title" class="selection-budget__title">
       {{ title }}
     </component>
@@ -60,7 +60,7 @@ const isLargeCard = (index: number) =>
         :size="isLargeCard(index) ? 'l' : 's'"
       />
     </ul>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

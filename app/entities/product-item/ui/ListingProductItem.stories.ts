@@ -8,7 +8,7 @@ import ListingProductItem from "./ListingProductItem.vue"
 
 const product = {
   id: "lyre",
-  img: "/images/ring1.png",
+  img: "/images/products/classic-item.jpg",
   materials: ["white", "yellow", "rose", "platinum"],
   name: "Lyre / Лира",
   price: "от 166 350 ₽",
@@ -28,7 +28,10 @@ const meta = {
     img: {
       control: "inline-radio",
       description: "Путь к фото товара",
-      options: ["/images/ring1.png", "/images/ring2.png"],
+      options: [
+        "/images/products/classic-item.jpg",
+        "/images/products/classic-main.jpg",
+      ],
     },
     materials: {
       control: "check",
@@ -83,7 +86,7 @@ export const Default: Story = {
 }
 
 export const Large: Story = {
-  args: { ...product, img: "/images/ring2.png", size: "l" },
+  args: { ...product, img: "/images/products/classic-main.jpg", size: "l" },
   name: "Крупная карточка",
   render: (args) => ({
     components: { ListingProductItem },
