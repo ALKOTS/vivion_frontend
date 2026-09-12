@@ -6,7 +6,7 @@ import ContentItem from "./ContentItem.vue"
 
 const article = {
   id: "how-to-choose-engagement-ring",
-  img: "/images/articles/engagement-ring.jpg",
+  img: "/images/articles/how-to-choose-engagement-ring.png",
   tags: ["Помолвка и свадьба", "Гид"],
   title: "Как выбрать<br/>помолвочное кольцо",
 } satisfies Article
@@ -35,7 +35,7 @@ const articles: Article[] = [
 ]
 
 const meta = {
-  args: { ...article, component: "div" },
+  args: { ...article, component: "div", titleTag: "h3" },
   argTypes: {
     component: {
       control: "inline-radio",
@@ -54,6 +54,11 @@ const meta = {
     },
     tags: { control: "object", description: "Рубрики для плашек" },
     title: { control: "text", description: "Заголовок статьи" },
+    titleTag: {
+      control: "inline-radio",
+      description: "Тег заголовка",
+      options: ["h2", "h3", "h4", "h5", "h6"],
+    },
   },
   component: ContentItem,
   parameters: {
@@ -64,6 +69,9 @@ const meta = {
           "плашки рубрик и заголовок. Карточка целиком — ссылка на статью.",
           "",
           "Ширину задаёт родитель: в макете это колонка сетки шириной 330px.",
+          "",
+          "Заголовок по умолчанию — `h3`, потому что карточки обычно лежат под",
+          "заголовком блока (`h2`); уровень меняется через `titleTag`.",
         ].join("\n"),
       },
     },

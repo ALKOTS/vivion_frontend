@@ -9,7 +9,7 @@ const banner = {
 }
 
 const meta = {
-  args: { ...banner },
+  args: { ...banner, titleTag: "div" },
   argTypes: {
     img: {
       control: "text",
@@ -20,6 +20,12 @@ const meta = {
       control: "text",
       description:
         "Заголовок баннера; вставляется как HTML, поэтому можно переносить строки через `<br>`",
+    },
+    titleTag: {
+      control: "inline-radio",
+      description:
+        "Тег заголовка: `div` — если заголовок не должен попадать в структуру страницы",
+      options: ["div", "h2", "h3", "h4", "h5", "h6"],
     },
   },
   component: HeroBanner,
@@ -50,6 +56,11 @@ export const Default: Story = { args: { ...banner }, name: "С картинко�
 export const TitleWithBreak: Story = {
   args: { ...banner, title: "Помолвочные кольца<br>с бриллиантами" },
   name: "Перенос в заголовке",
+}
+
+export const AsHeading: Story = {
+  args: { ...banner, titleTag: "h2" },
+  name: "Заголовок как h2",
 }
 
 export const NoImage: Story = {

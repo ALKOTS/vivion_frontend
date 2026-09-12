@@ -2,10 +2,7 @@
 type SectionBannerTitleTag = `h${2 | 3 | 4 | 5 | 6}`
 
 /**
- * Баннер-разделитель между секциями (в Figma — `DividerContent`): картинка слева
- * с плавным переходом в подложку, справа заголовок, описание и кнопки.
- *
- * Кнопки передаются через слот `actions` — сам баннер о действиях ничего не знает.
+ * Баннер-разделитель между секциями
  *
  * @example
  * <SectionBanner
@@ -20,7 +17,7 @@ type SectionBannerTitleTag = `h${2 | 3 | 4 | 5 | 6}`
  * </SectionBanner>
  */
 const { titleTag = "h2" } = defineProps<{
-  /** Путь к картинке слева; без неё остаётся пустая подложка. */
+  /** Путь к картинке слева. */
   img?: string
   /** Описание под заголовком. */
   text?: string
@@ -43,35 +40,37 @@ const hasActions = computed(() => !!slots.actions)
 </script>
 
 <template>
-  <div class="section-banner">
-    <div class="section-banner__img-wrapper">
-      <NuxtImg
-        v-if="img"
-        alt=""
-        class="section-banner__img"
-        format="webp"
-        height="168"
-        loading="lazy"
-        sizes="sm:684px"
-        :src="img"
-        width="684"
-      />
-    </div>
-
-    <div class="section-banner__container">
-      <div v-if="title || text" class="section-banner__content">
-        <component :is="titleTag" v-if="title" class="section-banner__title">
-          {{ title }}
-        </component>
-
-        <p v-if="text" class="section-banner__text">{{ text }}</p>
+  <section class="section-banner-wrapper">
+    <div class="section-banner">
+      <div class="section-banner__img-wrapper">
+        <NuxtImg
+          v-if="img"
+          alt=""
+          class="section-banner__img"
+          format="webp"
+          height="168"
+          loading="lazy"
+          sizes="sm:684px"
+          :src="img"
+          width="684"
+        />
       </div>
 
-      <div v-if="hasActions" class="section-banner__actions">
-        <slot name="actions" />
+      <div class="section-banner__container">
+        <div v-if="title || text" class="section-banner__content">
+          <component :is="titleTag" v-if="title" class="section-banner__title">
+            {{ title }}
+          </component>
+
+          <p v-if="text" class="section-banner__text">{{ text }}</p>
+        </div>
+
+        <div v-if="hasActions" class="section-banner__actions">
+          <slot name="actions" />
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

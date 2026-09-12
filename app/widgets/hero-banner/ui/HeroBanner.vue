@@ -1,28 +1,39 @@
 <script setup lang="ts">
 /**
- * Промо-баннер.
+ * Промо-баннер в шапке раздела; рендерится как `<section>`.
  *
  * @example
  * <HeroBanner
  *   img="/images/hero-rings.png"
  *   text="Мы создаём помолвочные кольца с бриллиантами..."
  *   title="Помолвочные кольца с бриллиантами"
- *   title-tag="h1"
+ *   title-tag="h2"
  * />
  */
-const props = defineProps<{
-  /** Путь к фоновой картинке; без неё остаётся серая подложка. */
-  img?: string
-  /** Описание под заголовком. */
-  text?: string
-  /** Заголовок баннера. */
-  title?: string
-}>()
+type TitleTag = "div" | `h${2 | 3 | 4 | 5 | 6}`
+
+const props = withDefaults(
+  defineProps<{
+    /** Путь к фоновой картинке; без неё остаётся серая подложка. */
+    img?: string
+    /** Описание под заголовком. */
+    text?: string
+    /** Заголовок баннера. */
+    title?: string
+    /**
+     * Тег заголовка.
+     *
+     * @default div
+     */
+    titleTag?: TitleTag
+  }>(),
+  { titleTag: "div" },
+)
 const hasContent = computed(() => props.title || props.text)
 </script>
 
 <template>
-  <div class="hero-banner">
+  <section class="hero-banner">
     <NuxtImg
       v-if="img"
       alt=""
@@ -36,12 +47,18 @@ const hasContent = computed(() => props.title || props.text)
     />
 
     <div v-if="hasContent" class="hero-banner__content">
-      <!-- eslint-disable-next-line vue/no-v-html -->
-      <div v-if="title" class="hero-banner__title" v-html="title" />
+      <!-- eslint-disable vue/no-v-html, vue/no-v-text-v-html-on-component -->
+      <component
+        :is="titleTag"
+        v-if="title"
+        class="hero-banner__title"
+        v-html="title"
+      />
+      <!-- eslint-enable vue/no-v-html, vue/no-v-text-v-html-on-component -->
 
       <p v-if="text" class="hero-banner__text">{{ text }}</p>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>

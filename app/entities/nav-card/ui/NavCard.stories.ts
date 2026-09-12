@@ -5,7 +5,7 @@ import type { NavCard as NavCardProps } from "../model/types"
 import NavCard from "./NavCard.vue"
 
 const card = {
-  img: "/images/nav-cards/ring-classic.png",
+  img: "/images/nav-cards/budget-1.jpg",
   label: "до 150 000 ₽",
   to: "/catalog/engagement-rings?price=0-150000",
 } satisfies NavCardProps
@@ -13,17 +13,17 @@ const card = {
 const cards: NavCardProps[] = [
   card,
   {
-    img: "/images/nav-cards/ring-classic.png",
+    img: "/images/nav-cards/budget-1.jpg",
     label: "до 300 000 ₽",
     to: "/catalog/engagement-rings?price=150000-300000",
   },
   {
-    img: "/images/nav-cards/ring-classic.png",
+    img: "/images/nav-cards/budget-1.jpg",
     label: "до 500 000 ₽",
     to: "/catalog/engagement-rings?price=300000-500000",
   },
   {
-    img: "/images/nav-cards/ring-classic.png",
+    img: "/images/nav-cards/budget-1.jpg",
     label: "от 1 000 000 ₽",
     to: "/catalog/engagement-rings?price=1000000-",
   },

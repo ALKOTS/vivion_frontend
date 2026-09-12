@@ -54,6 +54,23 @@ export default defineNuxtConfig({
     ],
   },
 
+  hooks: {
+    // @storybook-vue/nuxt регистрирует подмену useRoute/useRouter по абсолютному пути
+    // с обратными слэшами; на Windows они превращаются в escape-последовательности
+    // внутри сгенерированного import и Storybook не собирается. Приводим к POSIX.
+    'imports:sources': (presets) => {
+      const push = presets.push.bind(presets)
+      presets.push = (...items) =>
+        push(
+          ...items.map((preset) =>
+            'from' in preset && typeof preset.from === 'string'
+              ? { ...preset, from: preset.from.replaceAll('\\', '/') }
+              : preset,
+          ),
+        )
+    },
+  },
+
   nitro: {
     devStorage: { cache: { driver: 'memory' } },
   },

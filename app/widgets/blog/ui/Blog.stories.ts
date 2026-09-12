@@ -7,7 +7,7 @@ import Blog from "./Blog.vue"
 const articles: Article[] = [
   {
     id: "how-to-choose-engagement-ring",
-    img: "/images/articles/engagement-ring.jpg",
+    img: "/images/articles/how-to-choose-engagement-ring.png",
     tags: ["Помолвка и свадьба", "Гид"],
     title: "Как выбрать<br/>помолвочное кольцо",
   },

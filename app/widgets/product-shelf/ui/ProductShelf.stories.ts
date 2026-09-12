@@ -5,7 +5,7 @@ import type { Product } from "~/entities/product-item/model/types"
 import ProductShelf from "./ProductShelf.vue"
 
 const ring = {
-  img: "/images/ring1.png",
+  img: "/images/products/classic-item.jpg",
   materials: ["white", "yellow", "rose", "platinum"],
   name: "Lyre / Лира",
   price: "от 166 350 ₽",
@@ -25,7 +25,7 @@ const makeProducts = (count: number, withPrimary = false): Product[] =>
     ...ring,
     id: String(index + 1),
     ...(withPrimary && index === 0
-      ? { img: "/images/ring2.png", primary: true }
+      ? { img: "/images/products/classic-main.jpg", primary: true }
       : {}),
   }))
 

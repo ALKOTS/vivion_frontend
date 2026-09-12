@@ -6,7 +6,7 @@ import SelectionBudget from "./SelectionBudget.vue"
 
 type Card = NonNullable<SelectionBudgetProps["cards"]>[number]
 
-const img = "/images/nav-cards/ring-classic.png"
+const img = "/images/nav-cards/budget-1.jpg"
 
 const cards: Card[] = [
   {
