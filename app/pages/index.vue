@@ -89,8 +89,8 @@ const { disabledIds, select, selected, visibleShelves } = useCatalogFilter({
 </script>
 
 <template>
-  <div class="index-page">
-    <SectionNav>
+  <div class="index-page page">
+    <SectionNav class="_pt-40">
       <QuickFiltersGroup
         :disabled-ids
         :filters
