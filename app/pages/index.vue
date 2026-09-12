@@ -1,16 +1,19 @@
 <script setup lang="ts">
+import type { SelectionBudget } from "~/widgets/selection-budget/model/types"
+
 useHead({ title: "LaVivion" })
 
-const blog: Blog = {
-  cards: Array.from({ length: 3 }, (_, i) => ({ id: String(i), title: "ss" })),
-  count: 22,
+const budget: SelectionBudget = {
+  cards: [
+    ...Array.from({ length: 4 }, () => ({ label: "ss", title: "ss", to: "#" })),
+    { label: "ss", title: "ss", to: "#" },
+  ],
   title: "ss",
-  to: "#",
 }
 </script>
 
 <template>
   <div>
-    <Blog v-bind="blog" />
+    <SelectionBudget v-bind="budget" />
   </div>
 </template>
