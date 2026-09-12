@@ -62,7 +62,7 @@ const hasIcon = computed(() => (showIcon || variant === "icon") && icon)
   <button
     :class="[
       'simple-button',
-      getModifiers(size, variant, loading ? 'loading' : ''),
+      getModifiers(size, variant, loading ? 'loading' : undefined),
     ]"
     type="button"
     v-bind="$attrs"

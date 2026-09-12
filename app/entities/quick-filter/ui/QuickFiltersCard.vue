@@ -12,10 +12,13 @@ import type { QuickFilter } from "~/entities/quick-filter/model/types"
  *
  * @example
  * <QuickFiltersCard v-bind="filter" @click="applyFilter(filter.id)" />
+ * <QuickFiltersCard v-bind="filter" :active="filter.id === selected" />
  * <QuickFiltersCard v-bind="filter" loading />
  */
-const { disabled, loading } = defineProps<
+const { active, disabled, loading } = defineProps<
   {
+    /** Выбранная карточка: подсвечена так же, как нажатая. */
+    active?: boolean
     /** Выключенная карточка. */
     disabled?: boolean
     /** Состояние загрузки. */
@@ -31,7 +34,10 @@ defineOptions({ inheritAttrs: false })
   <button
     :class="[
       'quick-filters-card',
-      getModifiers(loading ? 'loading' : undefined),
+      getModifiers(
+        loading ? 'loading' : undefined,
+        active ? 'active' : undefined,
+      ),
     ]"
     :disabled
     type="button"
@@ -79,7 +85,8 @@ defineOptions({ inheritAttrs: false })
     }
   }
 
-  &:active:not(:disabled) {
+  &:active:not(:disabled),
+  &._active:not(:disabled) {
     #{$root}__pic {
       background: var(--additional-gray-200);
 
