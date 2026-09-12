@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
 import type { Article } from "~/entities/content-item/model/types"
 
-import Blog from "./Blog.vue"
+import BlogSection from "./BlogSection.vue"
 
 const articles: Article[] = [
   {
@@ -51,7 +51,7 @@ const meta = {
       description: "Адрес страницы блога для ссылки «Все статьи»",
     },
   },
-  component: Blog,
+  component: BlogSection,
   parameters: {
     docs: {
       description: {
@@ -67,13 +67,13 @@ const meta = {
     layout: "fullscreen",
   },
   render: (args) => ({
-    components: { Blog },
+    components: { BlogSection },
     setup: () => ({ args }),
-    template: `<div style="padding: 24px"><Blog v-bind="args" /></div>`,
+    template: `<div style="padding: 24px"><BlogSection v-bind="args" /></div>`,
   }),
   tags: ["autodocs"],
-  title: "Widgets/Blog",
-} satisfies Meta<typeof Blog>
+  title: "Widgets/BlogSection",
+} satisfies Meta<typeof BlogSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

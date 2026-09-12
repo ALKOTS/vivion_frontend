@@ -7,8 +7,8 @@ type BlogTitleTag = `h${2 | 3 | 4 | 5 | 6}`
  * Блок блога: .
  *
  * @example
- * <Blog :cards="articles" :count="22" title="Блог" to="/blog" />
- * <Blog :cards="articles" title="Читайте также" title-tag="h3" />
+ * <BlogSection :cards="articles" :count="22" title="Блог" to="/blog" />
+ * <BlogSection :cards="articles" title="Читайте также" title-tag="h3" />
  */
 const props = withDefaults(
   defineProps<
@@ -34,9 +34,9 @@ const hasSide = computed(() => Boolean(props.title) || hasMore.value)
 </script>
 
 <template>
-  <section class="blog">
-    <div v-if="hasSide" class="blog__side">
-      <component :is="titleTag" v-if="title" class="blog__title">
+  <section class="blog-section">
+    <div v-if="hasSide" class="blog-section__side">
+      <component :is="titleTag" v-if="title" class="blog-section__title">
         {{ title }}
       </component>
 
@@ -50,13 +50,13 @@ const hasSide = computed(() => Boolean(props.title) || hasMore.value)
       />
     </div>
 
-    <ul v-if="hasContent" class="blog__content">
+    <ul v-if="hasContent" class="blog-section__content">
       <!-- hasContent предполагает, что карточки точно существуют, поэтому "!" -->
       <ContentItem
         v-for="(card, index) in cards!"
         :key="index"
         v-bind="card"
-        class="blog__item"
+        class="blog-section__item"
         component="li"
       />
     </ul>
@@ -64,7 +64,7 @@ const hasSide = computed(() => Boolean(props.title) || hasMore.value)
 </template>
 
 <style lang="scss" scoped>
-.blog {
+.blog-section {
   --spacing: var(--spacing-24);
 
   display: grid;

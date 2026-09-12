@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@nuxtjs/storybook"
 
 import type { Product } from "~/entities/product-item/model/types"
 
-import ProductShelf from "./ProductShelf.vue"
+import ProductShelfSection from "./ProductShelfSection.vue"
 
 const ring = {
   img: "/images/products/classic-item.jpg",
@@ -57,7 +57,7 @@ const meta = {
         "Сколько всего товаров в разделе; показывается счётчиком у заголовка и в плашке «Смотреть все»",
     },
   },
-  component: ProductShelf,
+  component: ProductShelfSection,
   parameters: {
     docs: {
       description: {
@@ -73,13 +73,13 @@ const meta = {
     layout: "fullscreen",
   },
   render: (args) => ({
-    components: { ProductShelf },
+    components: { ProductShelfSection },
     setup: () => ({ args }),
-    template: `<div style="padding: 24px"><ProductShelf v-bind="args" /></div>`,
+    template: `<div style="padding: 24px"><ProductShelfSection v-bind="args" /></div>`,
   }),
   tags: ["autodocs"],
-  title: "Widgets/ProductShelf",
-} satisfies Meta<typeof ProductShelf>
+  title: "Widgets/ProductShelfSection",
+} satisfies Meta<typeof ProductShelfSection>
 
 export default meta
 type Story = StoryObj<typeof meta>
