@@ -4,6 +4,7 @@ import TextButtonSpecial from "./TextButtonSpecial.vue"
 
 const meta = {
   args: {
+    component: "button",
     disabled: false,
     loading: false,
     text: "Смотреть все",
@@ -13,6 +14,12 @@ const meta = {
     badge: {
       control: "text",
       description: 'Текст плашки; только для `variant="badge"`',
+    },
+    component: {
+      control: "inline-radio",
+      description:
+        "Чем рендерить: `button` — нативная <button>, `link` — <NuxtLink> с адресом из `to`",
+      options: ["button", "link"],
     },
     disabled: {
       control: "boolean",
@@ -29,6 +36,10 @@ const meta = {
       description: "Состояние загрузки: вместо содержимого спиннер",
     },
     text: { control: "text", description: "Подпись кнопки" },
+    to: {
+      control: "text",
+      description: 'Адрес ссылки; только для `component="link"`',
+    },
     variant: {
       control: "inline-radio",
       description: "Визуальный вариант; от него зависит набор пропсов",
@@ -46,6 +57,9 @@ const meta = {
           "`badge`, `startIcon` / `endIcon` — `icon`, `primary` — только текст.",
           "В контролах ниже все поля показаны сразу; лишние для выбранного",
           "варианта игнорируются.",
+          "",
+          'По умолчанию рендерится как `<button>`; с `component="link"` — как',
+          "`<NuxtLink>` с адресом из `to`.",
         ].join("\n"),
       },
     },
@@ -84,6 +98,17 @@ export const Loading: Story = {
 export const Disabled: Story = {
   args: { disabled: true, text: "Смотреть все", variant: "badge" },
   name: "Выключенная",
+}
+
+export const AsLink: Story = {
+  args: {
+    badge: "+22",
+    component: "link",
+    text: "Все статьи",
+    to: "/blog",
+    variant: "badge",
+  },
+  name: "Как ссылка",
 }
 
 export const AllVariants: Story = {
